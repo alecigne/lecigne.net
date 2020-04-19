@@ -5,7 +5,7 @@
 - Anthony Le Cigne, [[https://en.wikipedia.org/wiki/1986][33]]
 - PhD in cellular biology, now pursuing my longtime passion for
   computers and electronics as a software engineer
-- GNU Emacs devotee - it set me on the path to my current career. You
+- [[https://www.gnu.org/software/emacs/][GNU Emacs]] devotee - it set me on the path to my current career. You
   might meet me at the Emacs monthly meetup in Paris.
 - I'm on [[https://github.com/alecigne/][Github]].
 
