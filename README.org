@@ -1,0 +1,17 @@
+#+TITLE: lecigne.net
+
+This is the source for my [[https://lecigne.net/][website]].
+
+These pages result from the HTML export of various subprojects written
+using the [[https://www.gnu.org/software/emacs/][Emacs]] [[https://orgmode.org/][Org mode]] markup language. As of today, these
+subprojects are:
+
+- My [[https://github.com/alecigne/.emacs.d][Emacs configuration]]
+- My [[https://github.com/alecigne/public-notes][public notes]]
+
+The website structure is then synchronized to the webserver using the
+[[https://rclone.org/][rclone]] [[https://rclone.org/sftp/][SFTP backend]]:
+
+#+begin_src bash
+  rclone -v sync --exclude "/.git/" ~/pub/website website:www/
+#+end_src

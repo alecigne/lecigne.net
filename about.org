@@ -1,0 +1,26 @@
+#+TITLE: About...
+
+* ...me
+
+- Anthony Le Cigne, [[https://en.wikipedia.org/wiki/1986][33]]
+- PhD in cellular biology, now pursuing my longtime passion for
+  computers and electronics as a software engineer
+- GNU Emacs devotee - it set me on the path to my current career. You
+  might meet me at the Emacs monthly meetup in Paris.
+- I'm on [[https://github.com/alecigne/][Github]].
+
+* ...the website
+
+The pages you see in this website were written with [[https://www.gnu.org/software/emacs/][Emacs]] [[https://orgmode.org/][Org
+mode]]. The publishing process is fully automatic:
+
+- A selection of Org documents from my [[https://en.wikipedia.org/wiki/Personal_wiki][personal wiki]] (my [[https://github.com/alecigne/.emacs.d][Emacs
+  configuration]], my [[https://github.com/alecigne/public-notes][notes]], etc.) are merged together into a
+  "proto-website"
+- All files in the "proto-website" are exported to HTML
+- The HTML files are uploaded here.
+
+When I'm on the go, I use [[https://github.com/orgzly/orgzly-android][Orgzly]] to take notes in Org format. The
+publishing process uses Emacs in batch mode thanks to [[https://termux.com/][Termux]].
+
+The whys and hows of this setup will be addressed one day in a [[file:index.org][note]].

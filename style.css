@@ -1,0 +1,50 @@
+body {
+    font-family: 'Baloo Chettan 2', serif;
+    margin: 80px auto;
+    max-width: 700px;
+    line-height: 1.6;
+    color: #444;
+    padding: 0 10px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.2;
+}
+
+pre {
+    font-size: 12px;
+}
+
+pre.src {
+    position: relative;
+    padding-top: 1.2em;
+    overflow: auto;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 700px;
+  border-bottom: 1px solid #444;
+  z-index: 99999;
+}
+
+.topnav a {
+  font-family: 'Roboto', sans-serif;
+  float: left;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  color: #444;
+}
+
+.topnav a:hover {
+  background: #ddd;
+  color: black;
+}
