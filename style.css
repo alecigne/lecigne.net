@@ -48,3 +48,7 @@ pre.src {
   background: #ddd;
   color: black;
 }
+
+.topnav-right {
+  float: right;
+}
