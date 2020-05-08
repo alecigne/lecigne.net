@@ -1,0 +1,9 @@
+#+TITLE: News
+
+* [2020-05-08 Fri]
+
+A new [[file:notes/git-fu.html][note]] about Git tricks I'd like to remember :)
+
+* [2020-04-19 Sun]
+
+I updated the [[file:notes/common-lisp.html][note]] about setting up a Common Lisp environment.

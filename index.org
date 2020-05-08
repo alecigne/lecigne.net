@@ -7,6 +7,7 @@ it for public notes and let it evolve from there.
 
 * Notes
 
+- [[file:notes/git-fu.html][Git-Fu]]
 - [[file:notes/gnupg.html][GnuPG]]
 - [[file:notes/stow.html][GNU Stow]]
 - [[file:notes/common-lisp.html][Setting up a Common Lisp environment]]
