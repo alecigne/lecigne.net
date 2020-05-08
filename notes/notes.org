@@ -1,0 +1,11 @@
+#+TITLE: Notes
+
+- [[file:git-fu.html][Git-Fu]]
+- [[file:gnupg.html][GnuPG]]
+- [[file:stow.html][GNU Stow]]
+- [[file:common-lisp.html][Setting up a Common Lisp environment]]
+- [[file:emacs/README.html][SwanEmacs]], my Emacs configuration \\
+  This is an example of Org mode's [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]] abilities. The
+  Org files can be exported to executable Emacs Lisp files and to many
+  other formats, including the HTML you're reading now. The Org source
+  is also [[https://github.com/alecigne/.emacs.d][on Github]].

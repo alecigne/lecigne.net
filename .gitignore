@@ -1,4 +1,5 @@
 *
+!*/
 !.gitignore
 !README.org
 !index.org
@@ -7,3 +8,4 @@
 !top-menu.html
 !favicon.ico
 !news.org
+!/notes/notes.org

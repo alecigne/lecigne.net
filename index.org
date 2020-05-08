@@ -4,15 +4,3 @@ Welcome to my (not at all minimalist) website.
 
 Since it was "under construction" for years, I decided to simply use
 it for public notes and let it evolve from there.
-
-* Notes
-
-- [[file:notes/git-fu.html][Git-Fu]]
-- [[file:notes/gnupg.html][GnuPG]]
-- [[file:notes/stow.html][GNU Stow]]
-- [[file:notes/common-lisp.html][Setting up a Common Lisp environment]]
-- [[file:notes/emacs/README.html][SwanEmacs]], my Emacs configuration \\
-  This is an example of Org mode's [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]] abilities. The
-  Org files can be exported to executable Emacs Lisp files and to many
-  other formats, including the HTML you're reading now. The Org source
-  is also [[https://github.com/alecigne/.emacs.d][on Github]].
