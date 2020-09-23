@@ -1,0 +1,194 @@
+#+TITLE: GnuPG notes
+#+AUTHOR: Anthony Le Cigne
+
+* Syntax
+
+#+begin_example
+  gpg [options] command [args]
+#+end_example
+
+~gpg~ accepts a single command, but multiple options are allowed.
+
+In this how-to, we will introduce useful commands one by one, and
+various options along the line.
+
+* Useful commands and options
+
+** Encryption and decryption
+
+*** Symmetric encryption: ~--symmetric~
+
+The command is ~--symmetric~ or ~-c~.
+
+#+BEGIN_SRC sh
+  gpg --symmetric file.txt
+  gpg -c file.txt
+#+END_SRC
+
+By default, this will create ~file.txt.gpg~. To enter an output file,
+use ~--output~ or ~-o~:
+
+#+begin_src sh
+  gpg --output file.gpg -c file.txt
+  gpg -o file.gpg -c file.txt
+#+end_src
+
+To send the result to stdout, use ~-o -~:
+
+#+begin_src sh
+  gpg -o - -c file.txt
+#+end_src
+
+To encrypt using 7-bit ASCII, use ~--armor~ or ~-a~:
+
+#+begin_src sh
+  gpg -o - --armor -c file.txt
+  gpg -o - -a -c file.txt
+#+end_src
+
+To change the compression level, use ~--compress-level~ or ~-z~:
+
+#+begin_src sh
+  gpg --compress-level 0 -o - --armor -c file.txt
+  gpg -z 0 -o - -a -c file.txt
+#+end_src
+
+*** Asymetric encryption: ~--encrypt~
+
+The command is ~--encrypt~ or ~-e~.
+
+#+begin_src sh
+  gpg --encrypt file.txt
+  gpg -e file.txt
+#+end_src
+
+To specify a recipient, use the ~--recipient~ option, or ~-r~:
+
+#+begin_src sh
+  gpg --recipient bob@gmail.com -e file.txt
+  gpg -r bob@gmail.com -e file.txt
+#+end_src
+
+Asymetric encryption with the options seen so far:
+
+#+begin_src sh
+  gpg --compress-level 0 --output files.tgz.gpg --armor --recipient bob@gmail.com --encrypt files.tgz
+  gpg -z 0 -o files.tgz.gpg -a -r bob@gmail.com -e files.tgz
+#+end_src
+
+This command will encrypt ~files.tgz~ with:
+
+- No compression
+- Output to ~files.tgz.gpg~
+- ASCII armor
+- A recipient's email set to bob@gmail.com (this will use the
+  associated public key). The recipient's key ID will be visible in
+  the encrypted file.
+
+**** Bonus
+
+*Bonus 1*. By default, the recipient's key ID is visible in the
+encrypted file. If you want to hide this information, use the
+~--hidden-recipient~ option, or ~-R~:
+
+ #+begin_src sh
+   gpg -a -o file.gpg --hidden-recipient bob@gmail.com -e file.txt
+   gpg -a -o file.gpg -R bob@gmail.com -e file.txt
+ #+end_src
+
+*Bonus 2*. You can specify a default recipient (yourself) by editing
+~~/.gnupg/gpg.conf~. Replace ~[UID]~ below by your default key ID.
+
+#+begin_example
+  # The default key to sign with. If this option is not used, the
+  # default key is the first key found in the secret keyring.
+  default-key [UID]
+
+  # Use the default key as default recipient if option --recipient is
+  # not used and don't ask if this is a valid one.
+  default-recipient-self
+#+end_example
+
+*** Decryption: ~--decrypt~
+
+The command is ~--decrypt~ or ~-d~.
+
+#+begin_src sh
+  gpg --decrypt file.txt.gpg
+  gpg -d file.txt.gpg
+#+end_src
+
+By default, the decryption data goes to stdout. Use the ~-o~ option
+seen above to decrypt in a file:
+
+#+begin_src sh
+  gpg -o file.txt -d file.txt.gpg
+#+end_src
+
+**** Bonus
+
+To decrypt an "anonymous" encrypted file (see [[*Bonus][this section]]) using a
+specific secret key, use the ~--try-secret-key~ option. Otherwise
+GnuPG will try all secret keys in your keyring.
+
+#+begin_src sh
+  gpg -o file.txt --try-secret-key [key-id] -d file.gpg
+#+end_src
+
+** Key management
+
+*** Listing public keys: ~--list-public-keys~
+
+The command is ~--list-public-keys~, or ~-k~.
+
+#+begin_src sh
+  gpg --list-public-keys
+  gpg -k
+#+end_src
+
+*** Listing secret keys: ~--list-secret-keys~
+
+The command is ~--list-secret-keys~, or ~-K~.
+
+#+begin_src sh
+  gpg --list-secret-keys
+  gpg -K
+#+end_src
+
+*** Exporting public keys: ~--export~
+
+The command is ~--export~.
+
+#+begin_src sh
+  gpg --export [UID]
+#+end_src
+
+This command will export the public key [name]. By default this
+exports the key to stdout, in a binary format. To export in an ASCII
+file, use the options seen before:
+
+#+begin_src sh
+  gpg -a -o file.txt --export [UID]
+#+end_src
+
+*** Exporting secret keys: ~--export-secret-keys~
+
+The command is ~--export-secret-keys~.
+
+#+begin_src sh
+  gpg --export-secret-keys
+#+end_src
+
+As with ~--export~, you can use options to export in an ASCII file:
+
+#+begin_src sh
+  gpg -a -o secret_key.asc --export-secret-keys
+#+end_src
+
+*** Importing keys: ~--import~
+
+The command is ~--import~.
+
+#+begin_src sh
+  gpg --import key.asc
+#+end_src

@@ -1,0 +1,219 @@
+#+TITLE: Git-Fu
+
+A few tricks about Git I'd like to remember. Write early, improve
+later!
+
+* DOING From submodule to subdirectory
+
+** Context
+
+One of my repositories contains many distinct subprojects that I did
+during a Java training. This arborescence of subprojects look like
+this:
+
+#+begin_example
+  20180312_project1
+  20180312_project2
+  .
+  .
+  .
+  20180328_project20
+  .
+  .
+  .
+  20180410_project36
+#+end_example
+
+...and so on. =20180328_project20= has its own repository (also named
+=20180328_project20= and is included as a submodule.
+
+** Goal
+
+I want the =20180328_project20= submodule to become a subdirectory,
+and the submodule's history to be integrated to the main Git
+history. This integration should be chronological and the commit
+messages should be prefixed with the name of the project.
+
+Original Git history:
+
+#+begin_example
+  [project36] Add Angular component
+  [project36] Create project
+  .
+  .
+  .
+  [project2] Improve logic
+  [project2] Create project
+  [project1] Add CSS
+  [project1] Create project
+#+end_example
+
+Submodule's Git history:
+
+#+begin_example
+  Add Logback to POM
+  Create project
+#+end_example
+
+Target Git history:
+
+#+begin_example
+  [project36] Add Angular component
+  [project36] Create project
+  .
+  .
+  .
+  [project20] Add Logback to POM
+  [project20] Create project
+  .
+  .
+  .
+  [project2] Improve logic
+  [project2] Create project
+  [project1] Add CSS
+  [project1] Create project
+#+end_example
+
+** Steps
+
+*** Remove all traces of the submodule
+
+I'm used to do this manually, but there might be some better ways.
+
+1. Edit the =.gitmodules= file to remove the submodule and stage the
+   change.
+
+   #+begin_src sh
+     git add .gitmodules
+   #+end_src
+
+2. Remove the submodule files from version control.
+
+   #+begin_src sh
+     git rm --cached 20180328_project20
+   #+end_src
+
+3. Delete the files.
+
+   #+begin_src sh
+     rm -rf 20180328_project20
+   #+end_src
+
+4. Edit the =.git/config= file to remove the active submodule (only
+   when the submodule was cloned into the main repo).
+
+5. Remove the submodule from =.git/modules/= directory.
+
+   #+begin_src sh
+     rm -rf .git/modules/20180328_project20/
+   #+end_src
+
+6. Commit the changes.
+
+   #+begin_src sh
+     git commit -m "[project20] Remove submodule"
+   #+end_src
+
+*** Include target repository as a branch in main repo
+
+1. Add the distant repository to the main repository's remotes.
+
+   #+begin_src sh
+     git remote add origin-project20 [url for 20180328_project20]
+   #+end_src
+
+2. Fetch the target repo's content.
+
+   #+begin_src sh
+     git fetch origin-project20
+   #+end_src
+
+   You should see the remote master branch when running =git branch
+   -a=:
+
+   #+begin_example
+     remotes/origin-project20/master
+   #+end_example
+
+3. Checkout the target's repo =master= branch.
+
+   #+begin_src sh
+     git checkout -b project20 origin-project20/master
+   #+end_src
+
+   =git log= will show you the history.
+
+*** Rewrite target repo's history
+
+Here we have two goals:
+
+- Put *all the files* (except =.git=) from the target repo in a
+  subdirectory;
+- Prefix commit messages with the name of the project.
+
+  We also need to ensure that the commit date won't be changed by
+  these two steps in order to keep the chrological order of commits in
+  the final repo.
+
+
+1. Move all files in a subdirectory.
+
+   #+begin_src sh
+     git filter-branch --tree-filter "mkdir -p 20180328_project20; git mv -k * 20180328_project20" HEAD
+   #+end_src
+
+   ([[https://medium.com/@leyanlo/how-to-move-one-git-repository-into-a-subdirectory-of-another-with-rebase-2b297b628c57][source]])
+
+   Quote from the original article:
+
+   #+begin_quote
+   Dotfiles like .gitignore are not included, so you will need to go
+   back to those commits when they were created and make sure they are
+   created in the proper subdirectory, amending the commits using
+   interactive rebase.
+   #+end_quote
+
+   Use =git-rebase= for this.
+
+2. Prefix all commits with the name of the project. At the moment I
+   have no better solution than to /reword/ everything with a
+   interactive rebase.
+
+   #+begin_src sh
+     git rebase -i --root
+   #+end_src
+
+   ...then reword everything.
+
+3. Change the commit date to make it equal to authoring date.
+
+   #+begin_src sh
+     git filter-branch -f --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
+   #+end_src
+
+   =git log --pretty=fuller= should display the correct commit date.
+
+*** Merge target branch
+
+Now we can just merge that branch in the main repo.
+
+#+begin_src sh
+  git checkout master
+  git merge project20 --allow-unrelated-histories
+#+end_src
+
+*** Clean
+
+#+begin_src sh
+  git branch -D project20
+  git remote remove origin-project20
+#+end_src
+
+And push the result :)
+
+** Result
+
+- An arborescence with a =20180328_project20= subdirectory;
+- A git history containing the original target repo's history with a
+  prefix (such as =[project20] Create project=), everything in
+  chronological order.

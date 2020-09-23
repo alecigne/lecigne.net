@@ -1,0 +1,199 @@
+#+TITLE: GNU Stow
+#+AUTHOR: Anthony Le Cigne
+
+A short [[https://www.gnu.org/software/stow/][GNU Stow]] tutorial, written mainly as a reminder for myself in
+the context of setting up my [[https://github.com/alecigne/dotfiles][dotfiles]].
+
+* Quickstart
+
+Let's start from a ~~/.dotfiles~ directory. Just run:
+
+#+begin_src sh
+  stow emacs
+#+end_src
+
+This will treat the ~emacs~ directory as a Stow package and create a
+symlink pointing to its content (~.emacs.d~) *in the parent
+directory*, here, the home directory.
+
+#+begin_example
+  ~/.emacs.d -> ~/.dotfiles/emacs/.emacs.d
+#+end_example
+
+* Basics
+
+** ~stow [package]~
+
+Some users treat their stow directory as a big, unique package. See an
+example [[https://gitlab.com/ambrevar/dotfiles][here]]. In that case, from ~~/.dotfiles~, one could run:
+
+#+begin_src sh
+  stow .
+#+end_src
+
+This would stow the /current package/, creating symlinks to the entire
+content of ~~/.dotfiles~ in the parent directory (the homedir).
+
+I prefer to have a stow directory with multiple packages in it such as
+~emacs~ or ~i3~. So in my case, I would simply do:
+
+#+begin_src sh
+  stow emacs
+#+end_src
+
+This stows the ~emacs~ package to the parent directory, which is my
+homedir. This is equivalent to ~stow --stow emacs~, or ~stow -S
+emacs~.
+
+** ~stow [package] -t [target]~
+
+Now, let's say I am /inside/ one of my packages:
+
+#+begin_src sh
+  cd emacs
+#+end_src
+
+If I want to stow that current package to the home directory, I will
+run:
+
+#+begin_src sh
+  stow . -t ~
+#+end_src
+
+Here the ~-t~ option (/target/) is used to stow the current package
+(~emacs~) to the home directory. Otherwise the target directory would
+have been the Emacs package's parent directory, ~~/.dotfiles~.
+
+~-t~ is especially useful if, like mine, your dotfiles directory is
+not one directory above the home directory. Since I actually use
+~~/etc/dotfiles~, from that directory, I would run:
+
+#+begin_src sh
+  stow emacs -t ~
+#+end_src
+
+** ~stow -d [directory] [package] -t [target]~
+
+If I am not stowing from the dotfiles directory itself, I will run:
+
+#+begin_src sh
+  stow -d ~/etc/dotfiles emacs -t ~
+#+end_src
+
+The ~-d~ (/directory/) option allows you to specify the path of the
+dotfiles directory if you're not inside it.
+
+*** A quick observation
+
+Let's quote the manual:
+
+#+begin_quote
+[The -d DIR syntax] also has the effect of making the default target
+directory be the parent of "DIR"
+#+end_quote
+
+So if you don't give a ~-t~ option, the default target dir will be the
+parent of the dotfiles directory you specify:
+
+#+begin_src sh
+  stow -d ~/.dotfiles emacs
+#+end_src
+
+This would stow in the home directory (one directory above
+~~/.dotfiles~).
+
+** Dry runs
+
+To test what Stow will do, you can use the ~-n~ flag. This will
+simulate the changes without modifying the file system. To see more
+than eventual errors, use it in combination with the ~-v~ flag.
+
+Here is a moderately elaborate stow command just to summarize
+everything:
+
+#+begin_src sh
+  stow -n -vv -d ~/etc/dotfiles test -t ~
+#+end_src
+
+1. It is a dry run (~-n~)
+
+2. The verbosity is at level 2 (~-vv~)
+
+3. The dotfiles directory is ~~/etc/dotfiles~ (~-d~)
+
+4. We'll stow the /test/ package that contains a ~.test~ dotfile
+
+5. We're stowing to the home directory (~-t~); in other words, we want
+   ~~/.test~ to be a symlink pointing to ~~/etc/dotfiles/test/.test~
+
+Output:
+
+#+begin_example
+  stow dir is /home/alc/etc/dotfiles
+  stow dir path relative to target /home/alc is etc/dotfiles
+  Planning stow of package test...
+  LINK: .test => etc/dotfiles/test/.test
+  Planning stow of package test... done
+  WARNING: in simulation mode so not modifying filesystem.
+#+end_example
+
+* Ignore lists
+
+Files can be excluded from the stowing process using [[https://www.gnu.org/software/stow/manual/html_node/Ignore-Lists.html#Ignore-Lists][ignore lists]].
+
+* Folding
+
+Let's take a practical example to illustrate what [[https://www.gnu.org/software/stow/manual/stow.html#tree-folding][tree folding]] does.
+
+We want to keep a /single/ file from a VSCode config in the dotfiles
+directory: =~/.config/Code/User/settings.json=. So we create
+=~/etc/dotfiles/vscode/.config/Code/User/settings.json=. What does a dry run
+tell us?
+
+#+begin_src bash
+  stow -n -vv -d ~/etc/dotfiles vscode -t ~
+#+end_src
+
+#+begin_example
+  stow dir is /home/alc/etc/dotfiles
+  stow dir path relative to target /home/alc is etc/dotfiles
+  Planning stow of package vscode...
+  LINK: .config/Code => ../etc/dotfiles/vscode/.config/Code
+  Planning stow of package vscode... done
+  WARNING: in simulation mode so not modifying filesystem.
+#+end_example
+
+Yep, this command will create a symlink to
+=~/etc/dotfiles/vscode/.config/Code/= as =~/.config/Code/=. That's
+tree folding. As the documentation puts it:
+
+#+begin_quote
+This is called tree folding, since an entire subtree is “folded” into
+a single symlink.
+#+end_quote
+
+When VSCode is actually started, it will create many other directories
+and files under =~/.config/Code/=. Since it is a symlink, these
+directories and files will actually be created under
+=~/etc/dotfiles/vscode/.config/Code/= and pollute version
+control. That's not what we want.
+
+The solution to this is the ~--no-folding~ option:
+
+#+begin_src bash
+  stow -n -vv -d ~/etc/dotfiles vscode -t ~ --no-folding
+#+end_src
+
+#+begin_example
+  stow dir is /home/alc/etc/dotfiles
+  stow dir path relative to target /home/alc is etc/dotfiles
+  Planning stow of package vscode...
+  MKDIR: .config/Code
+  MKDIR: .config/Code/User
+  LINK: .config/Code/User/settings.json => ../../../etc/dotfiles/vscode/.config/Code/User/settings.json
+  Planning stow of package vscode... done
+  WARNING: in simulation mode so not modifying filesystem.
+#+end_example
+
+This time Stow is doing what it can to only create the symlink we are
+interested in.

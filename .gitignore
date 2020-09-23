@@ -1,12 +1,5 @@
-*
-!*/
-!.gitignore
-!README.org
-!index.org
-!about.org
-!style.css
-!top-menu.html
-!favicon.ico
-!news.org
-!/notes/notes.org
-!/assets/**
+/notes/emacs/
+*.pdf
+*.txt
+*.html
+!./top-menu.html

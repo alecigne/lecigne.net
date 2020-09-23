@@ -1,4 +1,5 @@
 #+TITLE: News
+#+OPTIONS: num:nil
 
 * [2020-05-08 Fri]
 

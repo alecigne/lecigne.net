@@ -1,0 +1,368 @@
+#+TITLE: Setting up a Common Lisp environment
+#+AUTHOR: Anthony Le Cigne
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+
+See the [[https://github.com/alecigne/dotfiles/tree/master/common-lisp][relevant section of my dotfiles]] for the configuration files.
+
+Available formats: [[file:common-lisp.pdf][PDF]], [[file:common-lisp.txt][TXT]], [[./common-lisp.org][ORG]].
+
+* SBCL
+
+I use [[http://www.sbcl.org/][SBCL]] as my Common Lisp implementation of choice. Source code and
+binaries can be found [[http://www.sbcl.org/platform-table.html][here]]; I usually prefer to let my package manager
+do the job:
+
+#+begin_src sh
+  sudo aptitude sbcl
+#+end_src
+
+As of [2020-04-19 Sun]:
+
+#+name: sbcl-version
+#+begin_src bash :results verbatim :exports both
+  sbcl --version
+#+end_src
+
+...results in...
+
+#+RESULTS: sbcl-version
+: SBCL 2.0.3.debian
+
+...for me.
+
+* Quicklisp
+
+[[https://www.quicklisp.org/beta/][Quicklisp]] is a library manager for Common Lisp.
+
+1. Download the install script.
+
+   #+begin_src sh
+     wget https://beta.quicklisp.org/quicklisp.lisp
+   #+end_src
+
+2. Load it.
+
+   #+begin_src sh
+     sbcl --load quicklisp.lisp
+   #+end_src
+
+3. Install Quicklisp. I prefer to install it in =~/.quicklisp=.
+
+   #+begin_src lisp
+     (quicklisp-quickstart:install :path ".quicklisp/")
+   #+end_src
+
+4. Notify SBCL about Quicklisp. Add this to your =.sbclrc= file:
+
+   #+begin_src lisp
+     #-quicklisp
+     (let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
+                                            (user-homedir-pathname))))
+       (when (probe-file quicklisp-init)
+         (load quicklisp-init)))
+   #+end_src
+
+** Optional
+
+Run ~sbcl~ again to check everything is right by trying to download a
+package.
+
+#+begin_src lisp
+  (ql:quickload "vecto")
+#+end_src
+
+Output:
+
+#+begin_example
+  To load "vecto":
+    Load 1 ASDF system:
+      asdf
+    Install 5 Quicklisp releases:
+      cl-vectors salza2 vecto zpb-ttf zpng
+  ; Fetching #<URL "http://beta.quicklisp.org/archive/salza2/2013-07-20/salza2-2.0.9.tgz">
+  ; 15.16KB
+  ==================================================
+  15,525 bytes in 0.02 seconds (631.71KB/sec)
+  ; Fetching #<URL "http://beta.quicklisp.org/archive/zpng/2015-04-07/zpng-1.2.2.tgz">
+  ; 39.20KB
+  ==================================================
+  40,141 bytes in 0.08 seconds (490.00KB/sec)
+  ; Fetching #<URL "http://beta.quicklisp.org/archive/zpb-ttf/2013-07-20/zpb-ttf-1.0.3.tgz">
+  ; 43.82KB
+  ==================================================
+  44,869 bytes in 0.08 seconds (554.65KB/sec)
+  ; Fetching #<URL "http://beta.quicklisp.org/archive/cl-vectors/2018-02-28/cl-vectors-20180228-git.tgz">
+  ; 30.68KB
+  ==================================================
+  31,415 bytes in 0.04 seconds (697.24KB/sec)
+  ; Fetching #<URL "http://beta.quicklisp.org/archive/vecto/2017-12-27/vecto-1.5.tgz">
+  ; 69.10KB
+  ==================================================
+  70,758 bytes in 0.11 seconds (628.18KB/sec)
+  ; Loading "vecto"
+  [package net.tuxee.aa]............................
+  [package net.tuxee.aa-bin]........................
+  [package net.tuxee.paths].........................
+  [package net.tuxee.vectors].......................
+  [package salza2]..................................
+  [package zpng]....................................
+  [package zpb-ttf].................................
+  [package vecto]........
+  ("vecto")
+#+end_example
+
+* ASDF
+
+[[https://common-lisp.net/project/asdf/asdf/Configuring-ASDF-to-find-your-systems.html][Another System Definition Facility]]. The following instructions are
+documented [[https://common-lisp.net/project/asdf/asdf/Configuring-ASDF-to-find-your-systems.html][here]], as of [2019-11-12 Tue].
+
+1. Create the following directory:
+
+   =~/.config/common-lisp/source-registry.conf.d/=
+
+2. Create a =.conf= file - I use =my-asdf.conf=. In this file, add a
+   line like this one:
+
+   #+begin_src lisp
+     (:tree "/home/alc/src/")
+   #+end_src
+
+   You should find this file [[https://github.com/alecigne/dotfiles/blob/master/common-lisp/.config/common-lisp/source-registry.conf.d/my-asdf.conf][here]].
+
+   Since I keep my programming projects in =/home/alc/src/=, this will
+   tell ASDF to recursively scan this directory looking for =.asd=
+   files. Of course choose your own dir :)
+
+   I wouldn't keep the ~.quicklisp~ directory in there. I didn't test
+   it, but that might have a few funky effects.
+
+** Optional
+
+Let's test things out by cloning a Lisp project managed with ASDF. I
+will use one of my projects for this test:
+
+#+begin_src sh
+  git clone https://github.com/alecigne/freecomm src/freecomm
+  sbcl
+#+end_src
+
+Then:
+
+#+begin_src lisp
+  (ql:quickload :freecomm)
+#+end_src
+
+At this step the project dependencies should be downloaded:
+
+#+begin_example
+  ,* (ql:quickload "freecomm")
+  To load "freecomm":
+    Load 1 ASDF system:
+      freecomm
+  ; Loading "freecomm"
+  ..................................................
+  [package iterate].................................
+  [package cl-unicode]..............................
+  [package cl-unicode-names]........................
+  [package editor-hints.named-readtables]...........
+  [package editor-hints.named-readtables]...........
+  [package cl-interpol].............................
+  [package cl-csv]..................................
+  [package freecomm].
+  ("freecomm")
+#+end_example
+
+#+begin_src lisp
+  (in-package :freecomm)
+#+end_src
+
+You should enter the ~freecomm~ package:
+
+#+begin_example
+  ,* (in-package :freecomm)
+  #<PACKAGE "FREECOMM">
+#+end_example
+
+* SLIME
+
+[[https://common-lisp.net/project/slime/][SLIME]] is the Superior Lisp Interaction Mode for Emacs.
+
+1. Install it.
+
+   - Using =use-package=
+
+     #+begin_src emacs-lisp
+       (use-package slime
+         :config
+         (when (eq system-type 'gnu/linux)
+           (setq slime-contribs '(slime-fancy)
+                 slime-protocol-version 'ignore)
+           (setq inferior-lisp-program "sbcl")))
+     #+end_src
+
+   - Using the package manager directly
+
+     Run ~M-x package-install RET slime RET~. Don't forget to set your
+     default Lisp by evaluating this expression:
+
+     #+begin_src emacs-lisp
+       (setq inferior-lisp-program "sbcl")
+     #+end_src
+
+2. Launch it with ~M-x slime~ and start exploring.
+
+* Creating a Lisp project
+
+[[https://www.xach.com/lisp/quickproject/][Quickproject]] is pretty neat for creating a Common Lisp project from
+scratch.
+
+1. Create a project.
+
+   #+begin_src lisp
+     (ql:quickload :quickproject)
+     (quickproject:make-project #p"~/src/my-quickproject-test/")
+   #+end_src
+
+2. Load the project:
+
+   #+begin_src lisp
+     (ql:quickload :my-quickproject-test)
+   #+end_src
+
+3. We will now create a small Common Lisp project that will be useful
+   in the next section.
+
+   In =my-quickproject-test.lisp=, add this ~main~ function:
+
+   #+begin_src lisp
+     (defun main (argv)
+       (declare (ignore argv))
+       (write-line "Hello, world"))
+   #+end_src
+
+   That's it!
+
+* Compilation
+
+[[https://www.xach.com/lisp/buildapp/][Buildapp]] is pretty cool.
+
+1. Install it.
+
+   #+begin_src lisp
+     (ql:quickload :buildapp)
+   #+end_src
+
+2. Build =buildapp= itself.
+
+   #+begin_src lisp
+     (buildapp:build-buildapp)
+   #+end_src
+
+   The binary will be created in the current directory.
+
+3. We'll now build =my-quickproject-test= :) Change the =buildapp=
+   directory to match yours; I use =~/bin/buildapp=.
+
+   #+begin_src sh
+     ~/bin/buildapp --output my-quickproject-test \
+                    --load-system my-quickproject-test \
+                    --entry my-quickproject-test:main
+   #+end_src
+
+4. Run the program: ~./my-quickproject-test~. You should see:
+
+   #+begin_example
+     ❯ ./my-quickproject-test
+     Hello, world
+   #+end_example
+
+* StumpWM
+
+1. Clone the StumpWM repository:
+
+   #+begin_src bash
+     git clone https://github.com/stumpwm/stumpwm
+   #+end_src
+
+2. Install the dependencies:
+
+   #+begin_src lisp
+     (ql:quickload '("clx" "cl-ppcre" "alexandria" "swank"))
+   #+end_src
+
+3. Compile it:
+
+   #+begin_src bash
+     ./autogen.sh
+     ./configure
+     make
+   #+end_src
+
+4. I prefer to link to the executable:
+
+   #+begin_src bash
+     ln -s ~/src/stumpwm/stumpwm ~/bin/stumpwm
+   #+end_src
+
+5. Create =~/.xinitrc= and add this line (point to your own
+   executable or link):
+
+   #+begin_src bash
+     exec /home/alc/bin/stumpwm
+   #+end_src
+
+6. Run ~startx~: it should work!
+
+** Optional
+
+You can connect to the Lisp process that StumpWM uses from SLIME.
+
+1. Add this to your StumpWM =init.lisp=:
+
+   #+begin_src lisp
+     (in-package :stumpwm)
+
+     (require :swank)
+
+     (swank-loader:init)
+
+     (defcommand swank () ()
+       (setf *top-level-error-action* :break)
+       (swank:create-server :port 4005
+                            :style swank:*communication-style*
+                            :dont-close t))
+
+     (swank)
+   #+end_src
+
+   If you encounter an error when running StumpWM with ~startx~, try
+   setting ~SBCL_HOME~. See [[https://github.com/stumpwm/stumpwm/issues/760#issuecomment-612226954][this comment]].
+
+2. Add this config to Emacs:
+
+   #+begin_src emacs-lisp
+     (defun yourname-swank-listening-p ()
+       (ignore-errors
+         (let ((p (open-network-stream "SLIME Lisp Connection Test" nil "localhost" 4005)))
+           (when p
+             (delete-process p)
+             t))))
+
+     (defun yourname-swank-autoconnect (&rest args)
+       (if (and (not (slime-connected-p))
+                (yourname-swank-listening-p))
+           (ignore-errors (slime-connect "localhost" 4005))))
+
+     (yourname-swank-autoconnect))
+   #+end_src
+
+   When you launch Emacs, if SLIME isn't already running and if a
+   Swank connection is available, SLIME will connect to it. Then in
+   the REPL, you can do this:
+
+   #+begin_src lisp
+     (in-package :stumpwm)
+     (message "hello world")
+   #+end_src
+
+   The message should appear on the screen.
