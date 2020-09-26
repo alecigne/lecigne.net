@@ -1,6 +1,12 @@
 #+TITLE: News
 #+OPTIONS: num:nil
 
+* [2020-09-26 Sat]
+
+I have improved the way I publish this website. A secondary effect is
+that you now can download my [[file:notes/notes.org][notes]] in different formats such as PDF or
+TXT (this is experimental and will be improved).
+
 * [2020-05-08 Fri]
 
 A new [[file:notes/git-fu.html][note]] about Git tricks I'd like to remember :)
