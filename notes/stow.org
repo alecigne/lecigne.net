@@ -1,4 +1,5 @@
 #+TITLE: GNU Stow
+#+SUBTITLE: Download as [[file:stow.pdf][PDF]], [[file:stow.txt][TXT]].
 #+AUTHOR: Anthony Le Cigne
 
 A short [[https://www.gnu.org/software/stow/][GNU Stow]] tutorial, written mainly as a reminder for myself in

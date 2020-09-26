@@ -1,10 +1,9 @@
 #+TITLE: Setting up a Common Lisp environment
+#+SUBTITLE: Download as [[file:common-lisp.pdf][PDF]], [[file:common-lisp.txt][TXT]]
 #+AUTHOR: Anthony Le Cigne
 #+LaTeX_CLASS_OPTIONS: [a4paper]
 
 See the [[https://github.com/alecigne/dotfiles/tree/master/common-lisp][relevant section of my dotfiles]] for the configuration files.
-
-Available formats: [[file:common-lisp.pdf][PDF]], [[file:common-lisp.txt][TXT]], [[./common-lisp.org][ORG]].
 
 * SBCL
 

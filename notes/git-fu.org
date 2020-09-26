@@ -1,9 +1,10 @@
 #+TITLE: Git-Fu
+#+SUBTITLE: Download as [[file:git-fu.pdf][PDF]], [[file:git-fu.txt][TXT]].
 
 A few tricks about Git I'd like to remember. Write early, improve
 later!
 
-* DOING From submodule to subdirectory
+* From submodule to subdirectory
 
 ** Context
 
