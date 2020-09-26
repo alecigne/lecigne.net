@@ -1,0 +1,106 @@
+#+TITLE: GNU Guix
+
+I have been more and more curious about [[https://guix.gnu.org/][GNU Guix]] lately. You can read
+about its advantages on the official website and in this [[https://ambrevar.xyz/guix-advance/][very
+interesting article]].
+
+I already manage a [[https://github.com/alecigne/dotfiles][dotfiles repository]], and I wanted to find a way to
+also install OS packages automatically, /including packages I usually
+compile/. Since a Bash script was out of question and that GNU Guix
+seems well-suited for this requirement, I decided to give it a try.
+
+In this scenario I use GNU Guix on top of my beloved distribution of
+choice since 2008, Debian, since Guix can coexist transparently with
+APT.
+
+* Day 1
+
+** Installing the package manager
+
+#+begin_src sh
+  su -
+#+end_src
+
+#+begin_src sh
+  wget https://sv.gnu.org/people/viewgpg.php?user_id=15145 \
+       -qO - | gpg --import -
+#+end_src
+
+#+begin_src sh
+  wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
+#+end_src
+
+#+begin_src sh
+  sh guix-install.sh
+#+end_src
+
+#+begin_src sh
+  which guix
+#+end_src
+
+** Installing my first package
+
+#+begin_src sh
+  guix package -i hello
+#+end_src
+
+#+begin_src sh
+  ls -al
+#+end_src
+
+=.guix-profile= has appeared!
+
+#+begin_src sh
+  which hello
+#+end_src
+
+#+begin_src sh
+  GUIX_PROFILE="$HOME/.guix-profile" source "$HOME/.guix-profile/etc/profile"
+#+end_src
+
+#+begin_src sh
+  which hello
+#+end_src
+
+#+begin_src sh
+  guix package -i emacs
+#+end_src
+
+#+begin_src sh
+  emacs --version
+#+end_src
+
+** Additional steps for a foreign distribution
+
+Both for your user and root (for the daemon):
+
+#+begin_src sh
+  guix package -i glibc-locales
+#+end_src
+
+** Updating Guix
+
+#+begin_src sh
+  ls ~/.config/
+#+end_src
+
+#+begin_src sh
+  guix pull
+#+end_src
+
+On a foreign distro, to update the build daemon:
+
+#+begin_src sh
+  sudo -i guix pull
+  systemctl restart guix-daemon.service
+#+end_src
+
+** Updating my packages
+
+#+begin_src sh
+  guix package -u
+#+end_src
+
+Sourcer pour avoir le nouveau binaire guix mis à jour
+
+** TODO Installing from manifest files
