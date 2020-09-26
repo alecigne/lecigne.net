@@ -1,27 +1,4 @@
 #+TITLE: lecigne.net
 
-This is the source for my [[https://lecigne.net/][website]].
-
-In this repo I keep *only* the files that are directly related to my
-website, such as the index page, the about page or the CSS. The
-website itself is generated from a combination of various subprojects
-such as:
-
-- These website-specific files
-- My [[https://github.com/alecigne/.emacs.d][Emacs configuration]]
-- My [[https://github.com/alecigne/public-notes][public notes]]
-
-All these subprojects are written using the [[https://www.gnu.org/software/emacs/][Emacs]] [[https://orgmode.org/][Org mode]] markup
-language. The website is generated[fn:1] automatically by Emacs itself
-using [[https://orgmode.org/manual/Publishing.html][the ~org-publish~ command]].
-
-Although Emacs could take care of it, I prefer to synchronize the
-website with the webserver using the [[https://rclone.org/][rclone]] [[https://rclone.org/sftp/][SFTP backend]]:
-
-#+begin_src bash
-  rclone -v sync --exclude "/.git/" ~/pub/website website:www/
-#+end_src
-
-* Footnotes
-
-[fn:1] Combination of subprojects + HTML export
+This is the source for my [[https://lecigne.net/][website]]. You can read about the publishing
+process on the index page, [[file:index.org][on Github]] or [[https://lecigne.net][on my website]].
