@@ -1,0 +1,55 @@
+#+TITLE: i3 and xmodmap
+#+SUBTITLE: Download as [[file:i3-xmodmap.pdf][PDF]], [[file:i3-xmodmap.txt][TXT]]
+#+AUTHOR: Anthony Le Cigne
+
+Maybe you tried to do something like this in your i3 config file:
+
+#+begin_example
+  exec --no-startup-id xmodmap ~/.Xmodmap
+#+end_example
+
+...and found out that it doesn't work.
+
+The culprit is =/etc/default/keyboard=[fn:1]. This file is read both
+when starting a TTY and X and will set up your keyboard
+configuration. This file looks like this on my machine:
+
+#+begin_example
+  # KEYBOARD CONFIGURATION FILE
+
+  # Consult the keyboard(5) manual page.
+
+  XKBMODEL="pc105"
+  XKBLAYOUT="fr"
+  XKBVARIANT="latin9"
+  XKBOPTIONS=""
+
+  BACKSPACE="guess"
+#+end_example
+
+The problem, it seems, is that when you start X this file is loaded
+/after/ your i3 config and it will overwrite your =xmodmap=
+settings. The only solution I found is to *move* the content of
+=/etc/default/keyboard= to =/etc/default/console-setup=[fn:2]. This
+way, you will still benefit from the default keyboard config in the
+TTY but no settings will be applied when you start X.
+
+Then, you can manually execute =setkbmap= in your i3 config:
+
+#+begin_example
+  exec --no-startup-id setxkbmap fr && xmodmap ~/.Xmodmap
+#+end_example
+
+I didn't specify all the parameters (variant, model...) but that
+doesn't seem to cause trouble so far.
+
+If you have a better solution, please leave me a comment [[https://github.com/alecigne/lecigne.net/issues][on my
+website's Github page]].
+
+* Footnotes
+
+[fn:1] https://unix.stackexchange.com/a/403963 
+
+[fn:2] I like to automate the set up of new systems with the Guix
+package manager and dotfiles. This problem will be quite annoying on a
+new system install, since I will probably need to do this manually.

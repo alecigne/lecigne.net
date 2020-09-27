@@ -1,6 +1,10 @@
 #+TITLE: News
 #+OPTIONS: num:nil
 
+* [2020-09-27 Sun]
+
+A new [[file:notes/i3-xmodmap.org][note]] about running xmodmap when starting the i3 window manager.
+
 * [2020-09-26 Sat]
 
 I have improved the way I publish this website. A secondary effect is
