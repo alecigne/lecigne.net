@@ -1,4 +1,5 @@
 #+TITLE: Anthony Le Cigne's public notes
+#+OPTIONS: num:nil
 
 Welcome to my - rather minimalistic - website.
 

@@ -55,7 +55,7 @@
          :exclude "notes.org" ; index
          :publishing-directory "./notes/"
          :recursive nil
-         :publishing-function org-ascii-publish-to-utf8
+         :publishing-function org-ascii-publish-to-ascii
 	 :headline-levels 4
          :with-toc nil
          :with-author t
