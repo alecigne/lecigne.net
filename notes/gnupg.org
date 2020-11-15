@@ -193,3 +193,35 @@ The command is ~--import~.
 #+begin_src sh
   gpg --import key.asc
 #+end_src
+
+* Using a Nitrokey Pro
+
+Use case: I want to store my private key on the [[https://www.nitrokey.com/][Nitrokey Pro]].
+
+** GPG
+
+1. Install =scdaemon=.
+2. Kill =gpg-agent=: =gpgconf --kill gpg-agent= \\
+   It will be restarted by =gnupg=.
+3. =gpg --card-status=: the card is detected.
+
+Then I wanted to see the key in the list: =gpg --list-keys=. But:
+
+#+begin_quote
+For some inexplicable reason, GnuPG cannot extract the public key
+from a smartcard except during generation. That means that to use
+the key from another computer, you either have to copy the public
+key from the original computer's GnuPG keyring, or you need to set
+the URL attribute to a file which contains the PGP public key
+block. Otherwise, the token is effectively locked to a single
+computer, and unuseable if you happen to trash your keyring unless
+you regenerate a key.
+#+end_quote
+
+([[https://forum.yubico.com/viewtopicdc19.html?f=26&t=1171][Source]])
+
+** NitrokeyApp
+
+1. Install =libccid= and =libnitrokey3=.
+2. https://github.com/Nitrokey/nitrokey-app/releases
+3. Make executable, execute
