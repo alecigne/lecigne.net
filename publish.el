@@ -2,8 +2,8 @@
 
 (setq make-backup-files nil
       org-html-validation-link nil
-      org-latex-packages-alist '(("margin=2cm" "geometry" nil)
-				 ("" "times" nil)))
+      org-latex-packages-alist '(("margin=2cm" "geometry" nil))
+      org-latex-compiler "xelatex")
 
 (add-to-list 'org-latex-logfiles-extensions "tex")
 
