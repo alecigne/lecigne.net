@@ -218,3 +218,66 @@ And push the result :)
 - A git history containing the original target repo's history with a
   prefix (such as =[project20] Create project=), everything in
   chronological order.
+
+* =git rebase --onto=
+
+[[https://stackoverflow.com/a/52984628][Someone said]] that =git rebase master= expands to:
+
+#+begin_src sh
+  git rebase --onto master master current
+#+end_src
+
+...with =current= being the current branch.
+
+[[https://stackoverflow.com/a/39081674][Other people say]] that you can think of =git rebase --onto= as:
+
+#+begin_src sh
+  git rebase --onto <newparent> <oldparent> <until>
+#+end_src
+
+Putting the two observations together, it would mean that in the first
+case, =master= is the new parent and... =master= is the old parent!
+
+#+begin_src sh
+  git rebase --onto master master current
+                    <newp> <oldp> <until>
+#+end_src
+
+Hypothesis:
+
+- =master= as a new parent is another branch so we "have access" to
+  its more recent commits
+- =master= as an old parent is "the newest commit on the current
+  branch which is also on master" (this will be a common ancestor).
+
+Let's test this hypothesis:
+
+#+begin_example
+                        I---J---K topicB
+                       /
+              E---F---G---H  topicA
+             /
+A---B---C---D  master
+#+end_example
+
+If we do this:
+
+#+begin_src sh
+  git rebase --onto master topicA topicB
+#+end_src
+
+We will have this:
+
+#+begin_example
+             I'--J'--K'  topicB
+            /
+            | E---F---G---H  topicA
+            |/
+A---B---C---D  master
+#+end_example
+
+Because:
+
+- The new parent will be the latest commit on =master= (D).
+- The old parent will be the latest commit from =topicA= on =topicB=
+  (G).
