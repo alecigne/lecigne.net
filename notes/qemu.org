@@ -1,0 +1,62 @@
+#+TITLE: Using QEMU
+#+SUBTITLE: Download as [[file:qemu.pdf][PDF]], [[file:qemu.txt][TXT]].
+
+I use QEMU to test my [[https://github.com/alecigne/ansible-desktop][ansible-desktop]] repository (automatic setup of a
+Debian workstation using Ansible). This page acts as a personal
+reminder about managing the QEMU image.
+
+1. [host] Install the =qemu-system-x86= package. This should install
+   =qemu-utils= as a recommended package, which provides =qemu-img=.
+
+2. [host] Create an image:
+
+   #+begin_src sh
+     qemu-img create debian.img 8G
+   #+end_src
+
+3. [host] Boot the image using QEMU. Pass it the Debian iso as an
+   argument:
+
+   #+begin_src sh
+     qemu-system-x86_64 -hda debian.img -cdrom ~/tmp/downloads/debian-11.0.0-amd64-netinst.iso -boot d -m 2048 -enable-kvm
+   #+end_src
+
+4. [guest] Install Debian.
+
+5. [host] Run the image with a port forwarding from the host's port
+   2222 to the guest's port 22:
+
+   #+begin_src sh
+     qemu-system-x86_64 -hda debian.img -m 2048 -enable-kvm -net user,hostfwd=tcp::2222-:22 -net nic
+   #+end_src
+
+6. [guest] As root, install =openssh-server=.
+
+7. [host] You should be able to connect to the guest from the host
+   using SSH:
+
+   #+begin_src sh
+     ssh alc@localhost -p 2222
+   #+end_src
+
+8. [host] If necessary, transfer some useful files from the host to
+   the guest...
+
+   #+begin_src sh
+     scp -P 2222 file.txt alc@localhost:/home/alc
+   #+end_src
+
+   [guest] ...or from guest to host (using the local network):
+
+   #+begin_src sh
+     scp file.txt alc@[ip-on-local-network]:/home/alc
+   #+end_src
+
+9. [host] Run the image in snapshot mode so you won't alter it:
+
+   #+begin_src sh
+     qemu-system-x86_64 -hda debian.img -m 2048 -snapshot -enable-kvm
+   #+end_src
+
+At this point I can test things out and always return to the same
+basic machine state.
