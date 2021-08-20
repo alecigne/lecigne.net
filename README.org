@@ -1,3 +1,16 @@
 #+TITLE: lecigne.net
 
 This is the source for my [[https://lecigne.net/][website]].
+
+- The HTML (but also PDF and TXT) export is taken care of by Emacs
+  (see the [[file:Makefile][Makefile]]). Run:
+
+  #+begin_src sh
+    make export
+  #+end_src
+
+- The transfer to my webserver is taken care of by =rclone=. Run:
+
+  #+begin_src sh
+    make publish
+  #+end_src
