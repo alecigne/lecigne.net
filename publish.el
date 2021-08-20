@@ -7,24 +7,17 @@
 
 (add-to-list 'org-latex-logfiles-extensions "tex")
 
-(setq swanemacs-html-preamble
+(setq alc-html-preamble
       (org-babel-with-temp-filebuffer "./top-menu.html" (buffer-string)))
 
-(setq swanemacs-org-export-html-head
+(setq alc-org-export-html-head
       (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://lecigne.net/style.css\"/>\n"
               "<link rel=\"icon\" href=\"https://lecigne.net/favicon.ico\"/>"
               "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">\n"
               "<link href=\"https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap\" rel=\"stylesheet\">"))
 
 (setq org-publish-project-alist
-      `(("emacs"
-         :base-directory ,user-emacs-directory
-         :base-extension "org"
-         :publishing-directory "./notes/emacs/"
-         :recursive t
-         :publishing-function org-org-publish-to-org
-         :exclude "elpa")
-	("org-html"
+      `(("org-html"
          :base-directory "./"
          :base-extension "org"
          :publishing-directory "./"
@@ -35,8 +28,8 @@
          :with-author nil
          :time-stamp-file nil
          :section-numbers t
-         :html-head ,swanemacs-org-export-html-head
-         :html-preamble ,swanemacs-html-preamble)
+         :html-head ,alc-org-export-html-head
+         :html-preamble ,alc-html-preamble)
 	("org-pdf"
          :base-directory "./notes/"
          :base-extension "org"
@@ -61,7 +54,7 @@
          :with-author t
          :time-stamp-file nil
          :section-numbers t)
-	("website" :components ("emacs" "org-html" "org-pdf" "org-txt"))))
+	("website" :components ("org-html" "org-pdf" "org-txt"))))
 
-(defun swanemacs-publish ()
+(defun alc-publish ()
   (org-publish "website" t))
