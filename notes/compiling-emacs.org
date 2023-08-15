@@ -1,0 +1,28 @@
+#+title: Compiling Emacs
+
+A little personal reminder on how I usually compile Emacs... After
+[[https://git.savannah.gnu.org/git/emacs.git/][cloning]] and =cd='ing in the source directory:
+
+#+begin_src sh
+./autogen.sh
+#+end_src
+
+#+begin_src sh
+./configure --without-compress-install --with-native-compilation=aot --with-json --with-mailutils --with-tree-sitter --with-gif --with-png --with-jpeg --with-rsvg --with-tiff --with-imagemagick
+#+end_src
+
+Some of these flags are a bit arbitrary, I should look into this.
+
+#+begin_src sh
+make -j $(nproc)
+#+end_src
+
+...and that's it! Of course many packages will probably miss, but I'll
+add them on this page the next time I compile Emacs from a fresh
+system.
+
+I usually create a symbolic link in a directory on my path:
+
+#+begin_src sh
+ln -s ~/src/emacs/src/emacs emacs
+#+end_src

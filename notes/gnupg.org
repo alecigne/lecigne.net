@@ -1,6 +1,5 @@
-#+TITLE: GnuPG notes
-#+SUBTITLE: Download as [[file:gnupg.pdf][PDF]], [[file:gnupg.txt][TXT]].
-#+AUTHOR: Anthony Le Cigne
+#+title: GnuPG notes
+#+author: Anthony Le Cigne
 
 * Syntax
 

@@ -1,5 +1,7 @@
-#+TITLE: Notes
+#+title: Notes
 
+- [[file:compiling-emacs.org][Compiling Emacs]]
+- [[file:signal-export.org][Exporting Signal backups to various formats]]
 - [[file:git-fu.org][Git-Fu]]
 - [[file:gnupg.org][GnuPG]]
 - [[file:stow.org][GNU Stow]]

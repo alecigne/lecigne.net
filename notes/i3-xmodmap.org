@@ -1,6 +1,5 @@
-#+TITLE: i3 and xmodmap
-#+SUBTITLE: Download as [[file:i3-xmodmap.pdf][PDF]], [[file:i3-xmodmap.txt][TXT]]
-#+AUTHOR: Anthony Le Cigne
+#+title: i3 and xmodmap
+#+author: Anthony Le Cigne
 
 Maybe you tried to do something like this in your i3 config file:
 
@@ -48,7 +47,7 @@ website's Github page]].
 
 * Footnotes
 
-[fn:1] https://unix.stackexchange.com/a/403963 
+[fn:1] https://unix.stackexchange.com/a/403963
 
 [fn:2] I like to automate the set up of new systems with the Guix
 package manager and dotfiles. This problem will be quite annoying on a

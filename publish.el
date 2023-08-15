@@ -5,8 +5,6 @@
       org-latex-packages-alist '(("margin=2cm" "geometry" nil))
       org-latex-compiler "xelatex")
 
-(add-to-list 'org-latex-logfiles-extensions "tex")
-
 (setq alc-html-preamble
       (org-babel-with-temp-filebuffer "./top-menu.html" (buffer-string)))
 
@@ -30,31 +28,7 @@
          :section-numbers t
          :html-head ,alc-org-export-html-head
          :html-preamble ,alc-html-preamble)
-	("org-pdf"
-         :base-directory "./notes/"
-         :base-extension "org"
-         :exclude "notes.org" ; index
-         :publishing-directory "./notes/"
-         :recursive nil
-         :publishing-function org-latex-publish-to-pdf
-	 :headline-levels 4
-         :with-toc nil
-         :with-author t
-         :time-stamp-file nil
-         :section-numbers t)
-	("org-txt"
-         :base-directory "./notes/"
-         :base-extension "org"
-         :exclude "notes.org" ; index
-         :publishing-directory "./notes/"
-         :recursive nil
-         :publishing-function org-ascii-publish-to-ascii
-	 :headline-levels 4
-         :with-toc nil
-         :with-author t
-         :time-stamp-file nil
-         :section-numbers t)
-	("website" :components ("org-html" "org-pdf" "org-txt"))))
+	("website" :components ("org-html"))))
 
 (defun alc-publish ()
   (org-publish "website" t))

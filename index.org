@@ -1,5 +1,6 @@
-#+TITLE: /home/alc
-#+OPTIONS: num:nil
+#+title: =/home/alc=
+#+subtitle: Anthony Le Cigne's personal website
+#+options: num:nil
 
 Welcome to my - rather minimalistic - website.
 

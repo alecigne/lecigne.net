@@ -1,0 +1,66 @@
+#+title: Exporting Signal backups
+
+1. Create a backup with Signal. Be careful -- if you delete all your
+   conversations, another two backups will be enough to delete your
+   precious backup file! So move your backup somewhere safe.
+
+2. For exporting the backup, I use the Docker version of
+   [[https://github.com/bepaald/signalbackup-tools][signalbackup-tools]] provided by [[https://gitlab.com/splatops/cntn-signalbackup-tools][this repository]].
+
+   The Dockerfile has not been updated for a while so you need to
+   change:
+
+   #+begin_example
+     FROM fedora:31
+   #+end_example
+
+   ...to:
+
+   #+begin_example
+     FROM fedora:latest
+   #+end_example
+
+   ...otherwise compiling =signalbackup-tools= will fail. At least, it
+   did fail for me.
+
+3. Create the Docker image:
+
+   #+begin_src sh
+     docker build -t signalbackuptools:latest .
+   #+end_src
+
+4. Create a directory and copy your Signal backup file there. Also,
+   create directories for different export formats. I'll create
+   directories for a raw export, a HTML export and a plain text
+   export:
+
+   #+begin_src sh
+     mkdir raw html txt
+   #+end_src
+
+5. Run a container with the right parameters.
+
+   Raw export:
+
+   #+begin_src sh
+     docker run -it -v "$PWD:$PWD" -w "$PWD" signalbackuptools:latest [backup-file] [passphrase] --output raw
+   #+end_src
+
+   HTML export:
+
+   #+begin_src sh
+     docker run -it -v "$PWD:$PWD" -w "$PWD" signalbackuptools:latest [backup-file] [passphrase] --exporthtml ./html
+   #+end_src
+
+   Plain text export:
+
+   #+begin_src sh
+     docker run -it -v "$PWD:$PWD" -w "$PWD" signalbackuptools:latest [backup-file] [passphrase] --exporttxt ./txt
+   #+end_src
+
+6. (Optional) In case you're migrating an old but compatible backup,
+   you might need to add the =--migratedb= parameter to the commands
+   above. Their output will tell you to do it anyway.
+
+   If the backup is too old to be compatible, you can still do a raw
+   export and explore the database using, for instance, [[https://sqlitebrowser.org/][sqlitebrowser]].

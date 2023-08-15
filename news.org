@@ -1,5 +1,19 @@
-#+TITLE: News
-#+OPTIONS: num:nil
+#+title: News
+#+options: num:nil
+
+* [2023-08-15 Tue]
+:PROPERTIES:
+:CREATED:  [2023-08-15 Tue 17:50]
+:END:
+
+Wow, some activity:
+
+- A new [[file:notes/compiling-emacs.org][note]] about how I usually compile Emacs.
+
+- Another [[file:notes/signal-export.org][note]] about exporting [[https://signal.org/][Signal]] backups to various formats.
+
+Also, I disabled exports in PDF and TXT to simplify the exporting
+process.
 
 * [2021-08-20 Fri]
 :PROPERTIES:

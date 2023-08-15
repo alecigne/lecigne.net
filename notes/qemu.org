@@ -1,5 +1,4 @@
-#+TITLE: Using QEMU
-#+SUBTITLE: Download as [[file:qemu.pdf][PDF]], [[file:qemu.txt][TXT]].
+#+title: Using QEMU
 
 I use QEMU to test my [[https://github.com/alecigne/ansible-desktop][ansible-desktop]] repository (automatic setup of a
 Debian workstation using Ansible). This page acts as a personal

@@ -1,4 +1,4 @@
-#+TITLE: About
+#+title: About
 
 * About me
 
@@ -9,6 +9,20 @@ cellular biology in 2016.
 Although my long-term goal is to become a confirmed software
 craftsman, I consider myself an apprentice, in the sense described in
 the book [[https://isbnsearch.org/isbn/9780596518387][Apprenticeship Patterns]] by Hoover and Oshineye.
+
+A few things I'm interested in and you might read about, /one day/, on
+this website:
+
+- Climbing and alpinism
+- Running
+- Cycling and bike touring
+- Hiking, especially in semi or full autonomy
+- Sailing
+- All things radio (ham radio, Software-Defined Radio, etc.)
+- Meditation
+- Astronomy
+- Programming
+- etc.
 
 * About the website
 
@@ -21,8 +35,7 @@ process is fully automatic, using Emacs in batch mode:
 1. The [[https://github.com/alecigne/lecigne.net][website itself]], a network of Org files kept under version
    control, is "augmented" with other Org projects.
 
-2. All Org files are [[https://orgmode.org/manual/Publishing.html][exported]], of course to HTML to generate the
-   website, but also to PDF and TXT.
+2. All Org files are [[https://orgmode.org/manual/Publishing.html][exported]] to HTML.
 
 3. The export is uploaded to my FTP using [[https://rclone.org/][rclone]].
 

@@ -1,5 +1,4 @@
-#+TITLE: Git-Fu
-#+SUBTITLE: Download as [[file:git-fu.pdf][PDF]], [[file:git-fu.txt][TXT]].
+#+title: Git-Fu
 
 A few tricks about Git I'd like to remember. Write early, improve
 later!
