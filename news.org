@@ -1,6 +1,14 @@
 #+title: News
 #+options: num:nil
 
+* [2023-11-04 Sat]
+:PROPERTIES:
+:CREATED:  [2023-11-04 Sat 21:17]
+:END:
+
+A new [[file:notes/deezer-token.org][note]] about requesting a Deezer token that doesn't expire. See
+[[https://github.com/alecigne/deezer-datasync][deezer-datasync]].
+
 * [2023-08-15 Tue]
 :PROPERTIES:
 :CREATED:  [2023-08-15 Tue 17:50]

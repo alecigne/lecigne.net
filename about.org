@@ -1,4 +1,5 @@
 #+title: About
+#+options: num:nil
 
 * About me
 
@@ -11,7 +12,8 @@ craftsman, I consider myself an apprentice, in the sense described in
 the book [[https://isbnsearch.org/isbn/9780596518387][Apprenticeship Patterns]] by Hoover and Oshineye.
 
 A few things I'm interested in and you might read about, /one day/, on
-this website:
+this website, in no particular order (yes, I like to be quite
+exhaustive):
 
 - Climbing and alpinism
 - Running
@@ -21,8 +23,10 @@ this website:
 - All things radio (ham radio, Software-Defined Radio, etc.)
 - Meditation
 - Astronomy
+- Freediving
 - Programming
-- etc.
+- Maps and cartography
+- etc. (not so exhaustive after all)
 
 * About the website
 

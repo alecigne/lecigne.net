@@ -1,0 +1,43 @@
+#+title: Requesting a Deezer access token
+#+author: Anthony Le Cigne
+
+This is a personal reminder about the procedure described [[https://developers.deezer.com/api/oauth][here]]. You
+might have landed on this page from [[https://github.com/alecigne/deezer-datasync][deezer-datasync]]. We'll request a
+token with no expiration -- an "offline" access token.
+
+1. Login on Deezer and go to [[https://developers.deezer.com/][Deezer for developers]].
+
+2. Click on "My Apps", then on "Create a new Application". Here I'll
+   use example.com as an application domain. You'll need the
+   application ID (=APP_ID= below) and the secret key (=SECRET_KEY=
+   below), so keep them ready to paste.
+
+3. Go to this link:
+
+   #+begin_example
+   https://connect.deezer.com/oauth/auth.php?app_id=APP_ID&redirect_uri=https://example.com&perms=offline_access
+   #+end_example
+
+4. Authorize the permissions.
+
+5. You'll be redirected to example.com. Copy the code in the URL:
+
+   #+begin_example
+   https://example.com/?code=[code]
+   #+end_example
+
+6. Now visit this URL:
+
+   #+begin_example
+   https://connect.deezer.com/oauth/access_token.php?app_id=APP_ID&secret=SECRET_KEY&code=CODE_FROM_ABOVE
+   #+end_example
+
+   You'll end up on a page delivering the token.
+
+   #+begin_example
+   access_token=[access-token]&expires=0
+   #+end_example
+
+7. If you're coming from [[https://github.com/alecigne/deezer-datasync][deezer-datasync]], add it to =application.conf=
+   under =deezer.token= (see example config in the README or source
+   code).

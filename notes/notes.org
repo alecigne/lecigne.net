@@ -6,5 +6,6 @@
 - [[file:gnupg.org][GnuPG]]
 - [[file:stow.org][GNU Stow]]
 - [[file:i3-xmodmap.org][How to make xmodmap work with the i3 window manager]]
+- [[file:deezer-token.org][Requesting a Deezer access token]]
 - [[file:common-lisp.org][Setting up a Common Lisp environment]]
 - [[file:qemu.org][Using QEMU]]
