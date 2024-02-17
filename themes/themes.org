@@ -1,0 +1,15 @@
+#+title: Themes
+
+- Climbing and alpinism
+- Running
+- Cycling and bike touring
+- Hiking, especially in semi or full autonomy
+- Sailing
+- [[file:radio.org][All things radio]] (ham radio, Software-Defined Radio, etc.)
+- Meditation
+- Astronomy
+- Freediving
+- Programming
+  + [[file:lisp.org][Lisp]]
+- Maps and cartography
+- etc.

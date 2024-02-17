@@ -1,0 +1,12 @@
+#+title: Lisp
+#+options: num:nil
+
+* Backlinks
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:30]
+:END:
+
+- [[file:../notes/flipper-brute-force.org][Generating sub-GHz brute-force files for the Flipper Zero]] :: The
+  script is written in Common Lisp.
+
+- [[file:../notes/common-lisp.org][Setting up a Common Lisp environment]] :: Self-explanatory :)

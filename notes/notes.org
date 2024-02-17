@@ -2,6 +2,7 @@
 
 - [[file:compiling-emacs.org][Compiling Emacs]]
 - [[file:signal-export.org][Exporting Signal backups to various formats]]
+- [[file:flipper-brute-force.org][Generating sub-GHz brute-force files for the Flipper Zero]] (draft)
 - [[file:git-fu.org][Git-Fu]]
 - [[file:gnupg.org][GnuPG]]
 - [[file:stow.org][GNU Stow]]

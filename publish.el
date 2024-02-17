@@ -3,7 +3,8 @@
 (setq make-backup-files nil
       org-html-validation-link nil
       org-latex-packages-alist '(("margin=2cm" "geometry" nil))
-      org-latex-compiler "xelatex")
+      org-latex-compiler "xelatex"
+      org-html-htmlize-output-type 'nil)
 
 (setq alc-html-preamble
       (org-babel-with-temp-filebuffer "./top-menu.html" (buffer-string)))

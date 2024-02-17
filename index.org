@@ -2,9 +2,30 @@
 #+subtitle: Anthony Le Cigne's personal website
 #+options: num:nil
 
-Welcome to my - rather minimalistic - website.
+Welcome to my (rather minimalistic) website.
 
 Since it was "under construction" for years, I decided to simply use
-it for [[file:notes/notes.org][public notes]] and let it evolve from there.
+it for [[file:notes/notes.org][public notes]] and let it evolve organically from there, in both
+form and content.
 
-See the [[file:notes/notes.org][notes]] or the [[file:about.org]["About"]] page :)
+There is no comment section, but if you feel like dropping a word, you
+can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions section]] of the corresponding [[https://github.com/alecigne/lecigne.net][GitHub repo]].
+
+* Organization
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 22:40]
+:END:
+
+- [[file:news.org][News]]: just a (manual) feed about what I consider to be significant
+  updates (on my website's scale :D)
+
+- [[file:notes/notes.org][Notes]]: just because "articles" was a bit too pompous, but that's
+  what they are -- reference documents that can evolve with time.
+
+- [[file:themes/themes.org][Themes]]: a few pages describing my main center of interest, with
+  backlinks that refer to notes
+
+- [[file:about.org][About]]: the "meta" section -- a few words about the website and
+  myself, because hey, why not.
+
+- +Blog+: one day there will be a blog section!
