@@ -1,7 +1,27 @@
 #+title: News
 #+options: num:nil
 
-* [2023-11-04 Sat]
+* 2024
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:41]
+:END:
+
+** [2024-07-07 Sun]
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:37]
+:END:
+
+The [[file:notes/compiling-emacs.org][Compiling Emacs]] note has been updated since the =--with-json= flag
+has been deprecated in Emacs 30.
+
+Newsworthy? Probably not. But hey, it's an update!
+
+* 2023
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:41]
+:END:
+
+** [2023-11-04 Sat]
 :PROPERTIES:
 :CREATED:  [2023-11-04 Sat 21:17]
 :END:
@@ -9,7 +29,7 @@
 A new [[file:notes/deezer-token.org][note]] about requesting a Deezer token that doesn't expire. See
 [[https://github.com/alecigne/deezer-datasync][deezer-datasync]].
 
-* [2023-08-15 Tue]
+** [2023-08-15 Tue]
 :PROPERTIES:
 :CREATED:  [2023-08-15 Tue 17:50]
 :END:
@@ -23,27 +43,44 @@ Wow, some activity:
 Also, I disabled exports in PDF and TXT to simplify the exporting
 process.
 
-* [2021-08-20 Fri]
+* 2022
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:41]
+:END:
+
+No updates :(
+
+* 2021
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:41]
+:END:
+
+** [2021-08-20 Fri]
 :PROPERTIES:
 :CREATED:  [2021-08-20 Fri 14:10]
 :END:
 
 A new [[file:notes/qemu.org][note]] about using QEMU.
 
-* [2020-09-27 Sun]
+* 2020
+:PROPERTIES:
+:CREATED:  [2024-07-07 Sun 16:41]
+:END:
+
+** [2020-09-27 Sun]
 
 A new [[file:notes/i3-xmodmap.org][note]] about running xmodmap when starting the i3 window manager.
 
-* [2020-09-26 Sat]
+** [2020-09-26 Sat]
 
 I have improved the way I publish this website. A secondary effect is
 that you now can download my [[file:notes/notes.org][notes]] in different formats such as PDF or
 TXT (this is experimental and will be improved).
 
-* [2020-05-08 Fri]
+** [2020-05-08 Fri]
 
 A new [[file:notes/git-fu.html][note]] about Git tricks I'd like to remember :)
 
-* [2020-04-19 Sun]
+** [2020-04-19 Sun]
 
 I updated the [[file:notes/common-lisp.html][note]] about setting up a Common Lisp environment.

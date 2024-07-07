@@ -7,11 +7,51 @@ A little personal reminder on how I usually compile Emacs... After
 ./autogen.sh
 #+end_src
 
+Then:
+
 #+begin_src sh
-./configure --without-compress-install --with-native-compilation=aot --with-json --with-mailutils --with-tree-sitter --with-gif --with-png --with-jpeg --with-rsvg --with-tiff --with-imagemagick
+  ./configure \
+      --without-compress-install \
+      --with-native-compilation=aot \
+      --with-json \
+      --with-mailutils \
+      --with-tree-sitter \
+      --with-gif \
+      --with-png \
+      --with-jpeg \
+      --with-rsvg \
+      --with-tiff \
+      --with-imagemagick
 #+end_src
 
-Some of these flags are a bit arbitrary, I should look into this.
+Some of these flags are a bit arbitrary: this is a starting point, and
+I should look into this. Actually, starting from Emacs 30, we can read
+this in =etc/NEWS=:
+
+#+begin_quote
+Native JSON support is now always available; libjansson is no longer
+used. No external library is required. The '--with-json' configure
+option has been removed. 'json-available-p' now always returns non-nil
+and is only kept for compatibility.
+#+end_quote
+
+So with this version of Emacs, the command becomes:
+
+#+begin_src sh
+  ./configure \
+      --without-compress-install \
+      --with-native-compilation=aot \
+      --with-mailutils \
+      --with-tree-sitter \
+      --with-gif \
+      --with-png \
+      --with-jpeg \
+      --with-rsvg \
+      --with-tiff \
+      --with-imagemagick
+#+end_src
+
+Let's then build Emacs:
 
 #+begin_src sh
 make -j $(nproc)
