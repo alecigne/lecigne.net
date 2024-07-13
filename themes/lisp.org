@@ -1,7 +1,7 @@
 #+title: Lisp
 #+options: num:nil
 
-* Backlinks
+* Related
 :PROPERTIES:
 :CREATED:  [2024-02-17 Sat 16:30]
 :END:

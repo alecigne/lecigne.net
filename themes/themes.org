@@ -9,7 +9,8 @@
 - Meditation
 - Astronomy
 - Freediving
-- Programming
+- Computing, programming & co
+  + [[file:emacs.org][Emacs]]
   + [[file:lisp.org][Lisp]]
 - Maps and cartography
 - etc.

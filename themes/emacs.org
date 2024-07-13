@@ -1,0 +1,12 @@
+#+title: Emacs
+#+options: num:nil
+
+The almighty [[https://www.gnu.org/software/emacs/][GNU editor]]! You can find my configuration [[https://github.com/alecigne/.emacs.d][on GitHub]].
+
+* Related
+:PROPERTIES:
+:CREATED:  [2024-07-13 Sat 12:52]
+:END:
+
+- [[file:../notes/compiling-emacs.org][Compiling Emacs]] :: A little personal reminder on how I usually
+  compile Emacs.
