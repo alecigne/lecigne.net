@@ -359,9 +359,10 @@ TODO
 :CREATED:  [2024-02-18 Sun 01:00]
 :END:
 
-Here we'll be writing a script in [[https://en.wikipedia.org/wiki/Common_Lisp][Common Lisp]]. I am not a strong Lisp
-programmer, but I just [[file:../themes/lisp.org][love Lisp]] :) The script will be tailored to our
-need so I won't bother writing defensive or even clean code.
+Here we'll be writing a script in [[https://en.wikipedia.org/wiki/Common_Lisp][Common Lisp]], step-by-step. I am not
+a strong Lisp programmer, but I just [[file:../themes/lisp.org][love Lisp]] :) The script will be
+tailored to our need so I won't bother writing defensive or even clean
+code. The script is available on [[https://github.com/alecigne/flipperzero-subghz-bruteforce][GitHub]].
 
 Let's start from our key: 854 in decimal value. It would be nice to
 obtain a list of bits from it. We can build this list recursively by
@@ -515,9 +516,7 @@ header, and then for every key, insert a signal line prefixed with a
   (generate-sub-file "bruteforce.sub" :from 0 :to 4095)
 #+end_src
 
-Voilà! The full script and the resulting file are available on GitHub
--- the link points to a specific tag that reflects the state of the
-script at the time of this writing, but it might have evolved since :)
+Voilà! Again, the script is available on [[https://github.com/alecigne/flipperzero-subghz-bruteforce][GitHub]].
 
 * Brute-forcing the garage door
 :PROPERTIES:
