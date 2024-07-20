@@ -41,3 +41,7 @@ token with no expiration -- an "offline" access token.
 7. If you're coming from [[https://github.com/alecigne/deezer-datasync][deezer-datasync]], add it to =application.conf=
    under =deezer.token= (see example config in the README or source
    code).
+
+Note that the token has no expiration. The only way I found to
+deactivate it (in case it is compromised, for example) is to edit the
+application and set 'Activate' to 'False'.
