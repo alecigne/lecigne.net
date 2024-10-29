@@ -22,7 +22,7 @@ can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions s
 - [[file:notes/notes.org][Notes]]: just because "articles" was a bit too pompous, but that's
   what they are -- reference documents that can evolve with time.
 
-- [[file:themes/themes.org][Themes]]: a few pages describing my main center of interest, with
+- [[file:themes/themes.org][Themes]]: a few pages describing my main centers of interest, with
   backlinks that refer to notes
 
 - [[file:about.org][About]]: the "meta" section -- a few words about the website and

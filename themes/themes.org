@@ -1,16 +1,24 @@
 #+title: Themes
 
-- Climbing and alpinism
-- Running
-- Cycling and bike touring
-- Hiking, especially in semi or full autonomy
-- Sailing
+- "Exploration"
+  + Climbing
+  + Alpinism
+  + Bike touring (especially in semi or full autonomy)
+  + Hiking (especially in semi or full autonomy)
+  + Sailing
+  + [[https://geohashing.site/][Geohashing]]
+- Sports
+  + Running
+  + Climbing
+  + Cycling
+  + Callisthenics
 - [[file:radio.org][All things radio]] (ham radio, Software-Defined Radio, etc.)
-- Meditation
-- Astronomy
-- Freediving
+  + Morse code (yep, nerd...)
 - Computing, programming & co
   + [[file:emacs.org][Emacs]]
   + [[file:lisp.org][Lisp]]
+- Meditation
+- Astronomy
 - Maps and cartography
+- Freediving
 - etc.
