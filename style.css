@@ -7,6 +7,19 @@ body {
     padding: 0 10px;
 }
 
+a {
+    color: #0047ab;
+    text-decoration: none;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #003380;
+    text-decoration: underline;
+}
+
 h1, h2, h3, h4, h5 {
     font-family: 'Roboto', sans-serif;
     line-height: 1.2;
