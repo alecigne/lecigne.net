@@ -42,8 +42,15 @@ Then, you can manually execute =setkbmap= in your i3 config:
 I didn't specify all the parameters (variant, model...) but that
 doesn't seem to cause trouble so far.
 
-If you have a better solution, please leave me a comment [[https://github.com/alecigne/lecigne.net/issues][on my
+If you have a better solution, please leave me a comment [[https://github.com/alecigne/lecigne.net/discussions][on my
 website's Github page]].
+
+* Alternative solution
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 17:02]
+:END:
+
+See [[https://github.com/alecigne/lecigne.net/issues/1#issue-2034549372][this comment]] on GitHub 🙂
 
 * Footnotes
 
