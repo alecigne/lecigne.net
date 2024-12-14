@@ -1,0 +1,13 @@
+#+title: TODOs
+
+- Update [[file:notes/common-lisp.org][note about setting up a Common Lisp environment]] since it is
+  quite old.
+
+  + Compiling SBCL
+  + Compiling StumpWM
+  + Using SLY
+
+- Link to a few of my Lisp repos in the [[file:themes/lisp.org][Lisp]] theme page.
+
+- Add a few words about my "home lab" and the few Java applications it
+  runs. Also, Reposilite, Gitea, Seq, etc.
