@@ -1,0 +1,135 @@
+#+title: Setting up NetworkManager on a minimal Linux install
+#+author: Anthony Le Cigne
+#+options: num:nil
+
+I really like [[https://networkmanager.dev/docs/api/latest/nmcli.html][=nmcli=]] (from [[https://networkmanager.dev/][NetworkManager]]). It is a minimalist CLI
+tool for managing network connections. It is ideal for servers,
+terminals, and automation.
+
+However, I encountered a few problems that deserve a little note.
+
+* The problems
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 16:19]
+:END:
+
+** Unmanaged interface
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 16:34]
+:END:
+
+When installing Debian, the installer might ask you for a WiFi
+password. This will update the =/etc/network/interfaces= file:
+
+#+begin_src conf
+  # This file describes the network interfaces available on your system
+  # and how to activate them. For more information, see interfaces(5).
+
+  source /etc/network/interfaces.d/*
+
+  # The loopback network interface
+  auto lo
+  iface lo inet loopback
+
+  # The primary network interface
+  allow-hotplug wifi0
+  iface wifi0 inet dhcp
+          wpa-ssid MySSID
+          wpa-psk  a-secure-passphrase
+#+end_src
+
+However, as stated [[https://wiki.debian.org/NetworkManager#Wired_Networks_are_Unmanaged][here]], this can interfere with NetworkManager since
+this tool won't manage any interface defined in the aforementioned
+file when =/etc/NetworkManager/NetworkManager.conf= contains:
+
+#+begin_src conf
+  [main]
+  plugins=ifupdown,keyfile
+
+  [ifupdown]
+  managed=false
+#+end_src
+
+...which in my experience is usually the case.
+
+When running:
+
+#+begin_src bash
+  nmcli device status
+#+end_src
+
+...you might see something like:
+
+#+begin_example
+  DEVICE             TYPE      STATE                   CONNECTION
+  wifi0              wifi      unmanaged               --
+#+end_example
+
+In addition, you probably won't see any networks when running =nmcli
+device wifi list=.
+
+** MAC address randomization
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 16:43]
+:END:
+
+=NetworkManager= also use MAC randomization by default, which has
+caused me some problems in the past.
+
+* The solution
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 16:19]
+:END:
+
+1. Delete everything related to the interface from
+   =/etc/network/interfaces=. The file above would become:
+
+   #+begin_src conf
+     # This file describes the network interfaces available on your system
+     # and how to activate them. For more information, see interfaces(5).
+
+     source /etc/network/interfaces.d/*
+
+     # The loopback network interface
+     auto lo
+     iface lo inet loopback
+   #+end_src
+
+2. Set =ifupdown.managed= to =true= in
+   =/etc/NetworkManager/NetworkManager.conf=:
+
+   #+begin_src conf
+     [main]
+     plugins=ifupdown,keyfile
+
+     [ifupdown]
+     managed=true
+   #+end_src
+
+3. Create =/etc/NetworkManager/conf.d/wifi_rand_mac.conf= with the
+   following content:
+
+   #+begin_src conf
+     [device-mac-randomization]
+     wifi.scan-rand-mac-address=yes
+
+     [connection-mac-randomization]
+     ethernet.cloned-mac-address=permanent
+     wifi.cloned-mac-address=permanent
+   #+end_src
+
+4. Reboot 🙂 Maybe restarting NetworkManager is enough:
+
+   #+begin_src bash
+     sudo service NetworkManager restart
+   #+end_src
+
+* Conclusion
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 16:59]
+:END:
+
+This piece of system configuration will be added to my [[https://github.com/alecigne/ansible-desktop][Ansible config]]
+one day.
+
+As usual, just [[https://github.com/alecigne/lecigne.net/discussions][create a discussion on GitHub]] if you have any comment.

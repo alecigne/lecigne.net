@@ -9,4 +9,5 @@
 - [[file:i3-xmodmap.org][How to make xmodmap work with the i3 window manager]]
 - [[file:deezer-token.org][Requesting a Deezer access token]]
 - [[file:common-lisp.org][Setting up a Common Lisp environment]]
+- [[file:linux-wifi.org][Setting up NetworkManager on a minimal Linux install]]
 - [[file:qemu.org][Using QEMU]]
