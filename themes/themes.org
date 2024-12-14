@@ -17,6 +17,7 @@
 - Computing, programming & co
   + [[file:emacs.org][Emacs]]
   + [[file:lisp.org][Lisp]]
+  + [[file:linux.org][Linux]]
 - Meditation
 - Astronomy
 - Maps and cartography

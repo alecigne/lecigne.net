@@ -1,0 +1,10 @@
+#+title: Linux
+#+options: num:nil
+
+* Related
+:PROPERTIES:
+:CREATED:  [2024-12-14 Sat 17:17]
+:END:
+
+- [[file:../notes/linux-wifi.org][Setting up NetworkManager on a minimal Linux install]] :: Fixing a few
+  problems with NetworkManager on Linux.
