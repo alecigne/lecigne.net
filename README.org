@@ -1,16 +1,14 @@
-#+TITLE: lecigne.net
+#+title: lecigne.net
 
 This is the source for my [[https://lecigne.net/][website]].
 
-- The HTML (but also PDF and TXT) export is taken care of by Emacs
-  (see the [[file:Makefile][Makefile]]). Run:
+[[https://github.com/casey/just][Just]] is used to execute predefined actions -- see [[file:Justfile][Justfile]].
 
-  #+begin_src sh
-    make export
-  #+end_src
+- =just clean= will remove any files that are not part of the source
+  itself (such as HTML files).
 
-- The transfer to my webserver is taken care of by =rclone=. Run:
+- =just publish= will publish the website (which means exporting it to
+  HTML, in Org-mode lingo) using Emacs -- see [[file:publish.el][publish.el]].
 
-  #+begin_src sh
-    make publish
-  #+end_src
+- =just deploy= will transfer the updated HTML files to my webserver
+  usin =rclone=.
