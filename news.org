@@ -19,8 +19,7 @@ NetworkManager on a minimal Linux install.
 :CREATED:  [2024-07-13 Sat 12:05]
 :END:
 
-A new [[file:notes/flipper-brute-force.org][note]] about... brute-forcing my garage door with a Flipper Zero
-:D
+A new [[file:notes/flipper-brute-force.org][note]] about... brute-forcing my garage door with a Flipper Zero 😃
 
 This note is actually still a draft, but it was on a Git branch for so
 long that I decided to include it. Hopefully, I'll make it evolve from
