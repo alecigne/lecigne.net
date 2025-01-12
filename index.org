@@ -1,9 +1,9 @@
-#+title: =/home/alc=
+#+title: =/home/alc/=
 #+subtitle: Anthony Le Cigne's personal website
 #+options: num:nil
 
 Welcome to my (rather minimalistic) website. You're browsing
-[[https://github.com/alecigne/lecigne.net/tree/v2024-12-14][v2024-12-14]].
+[[https://github.com/alecigne/lecigne.net/tree/v2025-01-12][v2025-01-12]].
 
 Since it was "under construction" for years, I decided to simply use
 it for [[file:notes/notes.org][public notes]] and let it evolve organically from there, in both
