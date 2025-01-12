@@ -13,10 +13,19 @@
               "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">\n"
               "<link href=\"https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap\" rel=\"stylesheet\">"))
 
+(setq alc-org-excluded-files "todo\\.org\\|README\\.org")
+
 (setq org-publish-project-alist
-      `(("org-html"
+      `(("org-static"
+         :base-directory "./"
+         :base-extension "png\\|jpg\\|gif\\|ico\\|css"
+         :publishing-directory "~/pub/lecigne.net/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("org-html"
          :base-directory "./"
          :base-extension "org"
+         :exclude ,alc-org-excluded-files
          :publishing-directory "~/pub/lecigne.net/"
          :recursive t
          :publishing-function org-html-publish-to-html
@@ -27,7 +36,7 @@
          :section-numbers t
          :html-head ,alc-org-export-html-head
          :html-preamble ,alc-html-preamble)
-	("website" :components ("org-html"))))
+	("website" :components ("org-html" "org-static"))))
 
 (defun alc-publish ()
   (org-publish "website" t))
