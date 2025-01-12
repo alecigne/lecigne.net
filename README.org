@@ -4,9 +4,6 @@ This is the source for my [[https://lecigne.net/][website]].
 
 [[https://github.com/casey/just][Just]] is used to execute predefined actions -- see [[file:Justfile][Justfile]].
 
-- =just clean= will remove any files that are not part of the source
-  itself (such as HTML files).
-
 - =just publish= will publish the website (which means exporting it to
   HTML, in Org-mode lingo) using Emacs -- see [[file:publish.el][publish.el]].
 
