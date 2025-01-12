@@ -2,8 +2,6 @@
 
 (setq make-backup-files nil
       org-html-validation-link nil
-      org-latex-packages-alist '(("margin=2cm" "geometry" nil))
-      org-latex-compiler "xelatex"
       org-html-htmlize-output-type 'nil)
 
 (setq alc-html-preamble
@@ -19,7 +17,7 @@
       `(("org-html"
          :base-directory "./"
          :base-extension "org"
-         :publishing-directory "./"
+         :publishing-directory "~/pub/lecigne.net/"
          :recursive t
          :publishing-function org-html-publish-to-html
 	 :headline-levels 4

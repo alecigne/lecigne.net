@@ -1,7 +1,0 @@
-/notes/emacs/
-*.pdf
-*.txt
-*.html
-*.tex
-*.log
-!./top-menu.html

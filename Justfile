@@ -1,6 +1,3 @@
-clean:
-    git clean -xdf "*.html"
-
 publish:
     emacs --script publish.el -f alc-publish
 
