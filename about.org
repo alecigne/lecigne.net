@@ -3,8 +3,8 @@
 
 * About me
 
-Since 2018, I am working as a software engineer, using mainly Java. In
-a past life, I worked in cancer research - I received a PhD in
+Since 2018, I am working as a [[https://fr.linkedin.com/in/anthonylecigne][software engineer]], using mainly Java. In
+a past life, I worked in cancer research -- I received a PhD in
 cellular biology in 2016.
 
 Although my long-term goal is to become a confirmed software
@@ -24,7 +24,7 @@ These pages have been written with [[https://www.gnu.org/software/emacs/][Emacs]
 process is fully automatic, using Emacs in batch mode:
 
 1. The [[https://github.com/alecigne/lecigne.net][website itself]], a network of Org files kept under version
-   control, is "augmented" with other Org projects.
+   control, is "augmented" with other Org [[file:projects/projects.org][projects]] (or "microsites").
 
 2. All Org files are [[https://orgmode.org/manual/Publishing.html][exported]] to HTML.
 

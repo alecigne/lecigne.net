@@ -1,0 +1,3 @@
+[submodule "projects/fennel-sandbox"]
+	path = projects/fennel-sandbox
+	url = git@github.com:alecigne/fennel-sandbox.git

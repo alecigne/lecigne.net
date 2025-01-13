@@ -13,8 +13,6 @@
               "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">\n"
               "<link href=\"https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap\" rel=\"stylesheet\">"))
 
-(setq alc-org-excluded-files "todo\\.org\\|README\\.org")
-
 (setq org-publish-project-alist
       `(("org-static"
          :base-directory "./"
@@ -25,7 +23,6 @@
         ("org-html"
          :base-directory "./"
          :base-extension "org"
-         :exclude ,alc-org-excluded-files
          :publishing-directory "~/pub/lecigne.net/"
          :recursive t
          :publishing-function org-html-publish-to-html

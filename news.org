@@ -1,6 +1,22 @@
 #+title: News
 #+options: num:nil
 
+* 2025
+:PROPERTIES:
+:CREATED:  [2025-01-13 Mon 23:55]
+:END:
+
+** [2025-01-13 Mon]
+:PROPERTIES:
+:CREATED:  [2025-01-13 Mon 23:55]
+:END:
+
+I've added a [[file:projects/projects.org][Projects]] section to the website! As written on the
+[[file:index.org][homepage]], they are independant GitHub repositories that use the same
+documentation format as this website ([[https://orgmode.org/][Org mode]] for [[https://www.gnu.org/software/emacs/][Emacs]]).
+
+The first project is [[file:projects/fennel-sandbox/README.org][fennel-sandbox]] -- have a look 🙂
+
 * 2024
 :PROPERTIES:
 :CREATED:  [2024-07-07 Sun 16:41]

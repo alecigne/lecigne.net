@@ -6,7 +6,20 @@
 :CREATED:  [2024-02-17 Sat 16:30]
 :END:
 
+** Notes
+:PROPERTIES:
+:CREATED:  [2025-01-14 Tue 00:02]
+:END:
+
 - [[file:../notes/flipper-brute-force.org][Generating sub-GHz brute-force files for the Flipper Zero]] :: The
   script is written in Common Lisp.
 
 - [[file:../notes/common-lisp.org][Setting up a Common Lisp environment]] :: Self-explanatory :)
+
+** Projects
+:PROPERTIES:
+:CREATED:  [2025-01-14 Tue 00:02]
+:END:
+
+- [[file:../projects/fennel-sandbox/README.org][fennel-sandbox]] :: A little project following my adventures with the
+  [[https://fennel-lang.org/][Fennel]] Lisp dialect.
