@@ -1,4 +1,24 @@
 #+title: Projects
 
+* Code
+:PROPERTIES:
+:CREATED:  [2025-01-18 Sat 23:57]
+:END:
+
 - [[file:fennel-sandbox/README.org][fennel-sandbox]] :: Code written while learning [[https://fennel-lang.org/][Fennel]], in particular
   for the [[https://tic80.com/][TIC-80]] fantasy console. ([[https://github.com/alecigne/fennel-sandbox][GitHub]])
+
+* Misc
+:PROPERTIES:
+:CREATED:  [2025-01-18 Sat 23:57]
+:END:
+
+- [[file:gralhix-osint-exercises/README.org][gralhix-osint-exercises]] :: My solutions to Sofia Santos' OSINT
+  exercises!
+
+* Config                                                           :noexport:
+:PROPERTIES:
+:CREATED:  [2025-01-18 Sat 23:59]
+:END:
+
+#+options: num:nil toc:nil

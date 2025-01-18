@@ -11,7 +11,11 @@
 :CREATED:  [2025-01-18 Sat 23:39]
 :END:
 
-I added the iteration 2 of [[file:projects/fennel-sandbox/2025-01-04_analog_clock/2025-01-04_analog_clock.org][my Fennel analog clock for the TIC-80]] 🕙
+Two additions today 😯
+
+- I added the iteration 2 of [[file:projects/fennel-sandbox/2025-01-04_analog_clock/2025-01-04_analog_clock.org][my Fennel analog clock for the TIC-80]] 🕙
+
+- I also included a new [[file:projects/gralhix-osint-exercises/README.org][OSINT-related project]].
 
 ** [2025-01-13 Mon]
 :PROPERTIES:

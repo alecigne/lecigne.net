@@ -1,0 +1,23 @@
+#+title: OSINT
+
+Aka [[https://en.wikipedia.org/wiki/Open-source_intelligence][Open-source intelligence]].
+
+* Related
+:PROPERTIES:
+:CREATED:  [2024-02-17 Sat 16:30]
+:END:
+
+** Projects
+:PROPERTIES:
+:CREATED:  [2025-01-14 Tue 00:02]
+:END:
+
+- [[file:../projects/gralhix-osint-exercises/README.org][gralhix-osint-exercises]] :: My solutions to Sofia Santos' OSINT
+  exercises.
+
+* Config                                                           :noexport:
+:PROPERTIES:
+:CREATED:  [2025-01-18 Sat 23:59]
+:END:
+
+#+options: num:nil toc:nil

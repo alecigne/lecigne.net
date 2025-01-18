@@ -1,3 +1,6 @@
 [submodule "projects/fennel-sandbox"]
 	path = projects/fennel-sandbox
 	url = git@github.com:alecigne/fennel-sandbox.git
+[submodule "projects/gralhix-osint-exercises"]
+	path = projects/gralhix-osint-exercises
+	url = git@github.com:alecigne/gralhix-osint-exercises.git

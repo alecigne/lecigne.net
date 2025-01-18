@@ -21,5 +21,6 @@
 - Meditation
 - Astronomy
 - Maps and cartography
+- [[file:osint.org][OSINT]]
 - Freediving
 - etc.
