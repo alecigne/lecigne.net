@@ -1,5 +1,6 @@
 #+title: Notes
 
+- [[file:accessing-synology.org][Accessing a Synology NAS without a router]]
 - [[file:compiling-emacs.org][Compiling Emacs]]
 - [[file:signal-export.org][Exporting Signal backups to various formats]]
 - [[file:flipper-brute-force.org][Generating sub-GHz brute-force files for the Flipper Zero]] (draft)

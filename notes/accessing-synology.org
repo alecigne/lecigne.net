@@ -1,0 +1,30 @@
+#+title: Accessing a Synology NAS without a router
+#+author: Anthony Le Cigne
+#+options: num:nil
+
+Recently, I had an issue with my home router, but I needed to access
+some files on my Synology NAS. Below is a quick self-reminder of the
+method I used to connect to the web interface. This should work for
+any type of network device.
+
+1. Plug the NAS into your computer via Ethernet.
+
+2. Since the NAS lost its connection to the router, it will have
+   assigned itself a fallback IP from the [[https://en.wikipedia.org/wiki/Link-local_address][link-local]] range. Using
+   [[https://github.com/royhills/arp-scan][=arp-scan=]], we will scan the entire IP range to find the NAS:
+
+   #+begin_src sh
+     sudo arp-scan --interface=[your-interface] 169.254.0.0/16
+   #+end_src
+
+   For example, the IP might be: =169.254.239.105=.
+
+3. Once you have the IP, set your PC's IP on the same interface to be
+   in the same range, for example =169.254.239.50=:
+
+   #+begin_src sh
+     sudo ip addr add 169.254.239.50/16 dev [your-interface]
+   #+end_src
+
+4. You should now be able to access the Synology web interface on
+   =169.254.239.105:5000= 🙂

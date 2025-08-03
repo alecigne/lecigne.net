@@ -6,6 +6,13 @@
 :CREATED:  [2025-01-13 Mon 23:55]
 :END:
 
+** [2025-08-03 Sun]
+:PROPERTIES:
+:CREATED:  [2025-08-03 Sun 19:43]
+:END:
+
+A new [[file:notes/accessing-synology.org][note]] about accessing a Synology NAS without a router.
+
 ** [2025-01-18 Sat]
 :PROPERTIES:
 :CREATED:  [2025-01-18 Sat 23:39]
