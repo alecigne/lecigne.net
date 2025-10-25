@@ -6,6 +6,16 @@
 :CREATED:  [2025-01-13 Mon 23:55]
 :END:
 
+** [2025-10-25 Sat]
+:PROPERTIES:
+:CREATED:  [2025-10-25 Sat 13:13]
+:END:
+
+🍂🍂🍂
+
+A new [[file:notes/postgres-docker.org][note]] as a personal reminder about setting up a Postgres Docker
+container for my homelab.
+
 ** [2025-08-03 Sun]
 :PROPERTIES:
 :CREATED:  [2025-08-03 Sun 19:43]

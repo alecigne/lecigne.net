@@ -1,0 +1,101 @@
+#+title: Setting up a Postgres Docker container for a homelab
+#+author: Anthony Le Cigne
+#+options: num:nil
+
+This is simply a personal reminder about setting up a PostgreSQL
+Docker container for my homelab. I have multiple services running on a
+Raspberry Pi, such as [[https://github.com/alecigne/somafm-song-history][somafm-song-history]], that need a PostgreSQL
+server. The best place to host it is my Synology NAS, with a little
+backup script.
+
+* Creating the container
+:PROPERTIES:
+:CREATED:  [2025-10-25 Sat 13:15]
+:END:
+
+1. Download the image. On a Synology NAS, I will simply use [[https://www.synology.com/fr-fr/dsm/feature/container-manager][Container
+   Manager]].
+
+2. Create a new Postgres container from that image. Useful parameters:
+
+   - Resources limitations: 2048 MB is fine for a start.
+
+   - Local port: 55432 to 5432.
+
+   - Volume settings (this is for PostgreSQL v18):
+     =/volume1/docker/postgres= -> =/var/lib/postgresql/=
+
+   - Environment: set =POSTGRES_PASSWORD= to =password=. It is best
+     use a temporary password here and change it afterwards since it
+     will stay visible in Container Manager's GUI.
+
+   - Run it.
+
+* Configuring users
+:PROPERTIES:
+:CREATED:  [2025-10-25 Sat 13:16]
+:END:
+
+1. Just log in with =postgres= / =password= 🙂 I use IntelliJ Ultimate
+   for this.
+
+2. Change the password associated to the =postgres= user:
+
+   #+begin_src sql
+     alter role postgres with password 'YourNewStrongPassword';
+   #+end_src
+
+   Remember, use ='= to escape ='= (so ='= will be =''=).
+
+   I use the mighty [[https://www.passwordstore.org/][pass]] to generate and store passwords.
+
+3. Create a user with reasonable privileges:
+
+   #+begin_src sql
+     create role alc login password 'YourStrongPassword' nosuperuser nocreatedb nocreaterole noreplication;
+   #+end_src
+
+4. Create your databases. They will contain a single =public= schema.
+
+   #+begin_src sql
+     create database myservice owner alc;
+   #+end_src
+
+5. Log in with the new user. It should work.
+
+6. Configure and test your services with this user and the right
+   database.
+
+* Backing things up
+:PROPERTIES:
+:CREATED:  [2025-10-25 Sat 13:16]
+:END:
+
+1. Create a script on the NAS. I use my user's directory.
+
+   #+begin_src sh
+     #!/bin/bash
+     set -euo pipefail
+
+     BACKUP_DIR="/your/backup/directory"
+     DB_USER="alc"
+     DB_PASSWORD="YourStrongPassword"
+     DB_LIST=("myservice")
+
+     mkdir -p "${BACKUP_DIR}"
+
+     for DB in "${DB_LIST[@]}"; do
+       echo "Backing up ${DB}..."
+       docker exec postgres env PGPASSWORD="${DB_PASSWORD}" \
+         pg_dump -U "${DB_USER}" -F p "${DB}" \
+       | gzip > "${BACKUP_DIR}/${DB}-$(date +%F).dump.gz"
+     done
+
+     # Keep 14 days
+     find "${BACKUP_DIR}" -type f -name '*.dump.gz' -mtime +14 -delete
+   #+end_src
+
+   Keeping the password in there is not ideal, but acceptable for a
+   homelab. I will address this later.
+
+2. Configure Synology's [[https://kb.synology.com/en-uk/DSM/help/DSM/AdminCenter/system_taskscheduler?version=7][Task Scheduler]] to execute this script daily.

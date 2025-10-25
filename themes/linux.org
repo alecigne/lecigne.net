@@ -6,5 +6,8 @@
 :CREATED:  [2024-12-14 Sat 17:17]
 :END:
 
+- [[file:../notes/postgres-docker.org][Setting up a Postgres Docker container for a homelab]] :: Container
+  creation, configuration, and backups.
+
 - [[file:../notes/linux-wifi.org][Setting up NetworkManager on a minimal Linux install]] :: Fixing a few
   problems with NetworkManager on Linux.
