@@ -11,5 +11,6 @@
 - [[file:deezer-token.org][Requesting a Deezer access token]]
 - [[file:common-lisp.org][Setting up a Common Lisp environment]]
 - [[file:postgres-docker.org][Setting up a Postgres Docker container for a homelab]]
+- [[file:synology-domains.org][Setting up local domains on a LAN using a Synology NAS]]
 - [[file:linux-wifi.org][Setting up NetworkManager on a minimal Linux install]]
 - [[file:qemu.org][Using QEMU]]

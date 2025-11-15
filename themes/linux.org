@@ -9,5 +9,8 @@
 - [[file:../notes/postgres-docker.org][Setting up a Postgres Docker container for a homelab]] :: Container
   creation, configuration, and backups.
 
+- [[file:../notes/synology-domains.org][Setting up local domains on a LAN using a Synology NAS]] :: Accessing
+  resources on a LAN using tailored URLs such as =dsm.homelab.lan/=.
+
 - [[file:../notes/linux-wifi.org][Setting up NetworkManager on a minimal Linux install]] :: Fixing a few
   problems with NetworkManager on Linux.

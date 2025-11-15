@@ -1,0 +1,119 @@
+#+title: Setting up local domains on a LAN using a Synology NAS
+#+author: Anthony Le Cigne
+#+options: num:nil
+
+Our goal is to access various resources on a LAN using custom domains
+such as =dsm.homelab.lan= (for accessing [[https://www.synology.com/fr-fr/dsm][Synology DSM]]). We will use a
+Synology NAS for this, acting as an authoritative DNS server.
+
+1. Install DNS Server on the Synology using Package Center.
+
+2. Open it and create a primary zone. See the configuration below for
+   =homelab.lan=. Simply replace the primary DNS server by your NAS
+   IP.
+
+   #+caption: Configuration for the primary zone.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_165524_screenshot.png]]
+
+   DNS Server should have created the default records below.
+
+   #+caption: Default records for the zone.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_165637_screenshot.png]]
+
+   At this point we can already perform a few tests to make sure
+   everything works as intended.
+
+3. Add the NAS as your primary DNS server on your router. In my case,
+   in the DHCP section of my router:
+
+   #+caption: Adding the NAS as a primary DNS server.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_171204_screenshot.png]]
+
+4. On one of your GNU/Linux machines (for Windows, you're on your own
+   here 😇), refresh your DNS entries.
+
+   #+begin_src bash
+     sudo dhclient -r && sudo dhclient
+   #+end_src
+
+   After this step, you should see your NAS IP in the =resolv.conf=
+   file:
+
+   #+begin_src bash
+     cat /etc/resolv.conf
+   #+end_src
+
+5. You should now be able to ping =ns.homelab.lan=, but not
+   =homelab.lan=.
+
+   #+begin_src bash
+     ping -c 3 ns.homelab.lan && ping -c 3 homelab.lan
+   #+end_src
+
+   #+begin_example
+     > ping -c 3 ns.homelab.lan && ping -c 3 homelab.lan
+     PING ns.homelab.lan (192.168.1.24) 56(84) bytes of data.
+     64 bytes from 192.168.1.24: icmp_seq=1 ttl=64 time=1.95 ms
+     64 bytes from 192.168.1.24: icmp_seq=2 ttl=64 time=4.95 ms
+     64 bytes from 192.168.1.24: icmp_seq=3 ttl=64 time=5.78 ms
+
+     --- ns.homelab.lan ping statistics ---
+     3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+     rtt min/avg/max/mdev = 1.949/4.226/5.784/1.646 ms
+     ping: homelab.lan: No address associated with hostname
+   #+end_example
+
+   This is normal. However, you should be able to use the DNS lookup
+   utility =dig= on both.
+
+   #+begin_src bash
+     dig ns.homelab.lan
+     dig homelab.lan
+   #+end_src
+
+6. Now let's add a DNS record for Synology DSM at
+   =dsm.homelab.lan=. On the =homelab.lan= zone, click =Edit >
+   Resource record=.
+
+   #+caption: Adding a new record to the zone.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_172649_screenshot.png]]
+
+   Click =Create > A type= and fill the dialog like this:
+
+   #+caption: Adding a new record to the zone.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_172900_screenshot.png]]
+
+   Save and finish. You should be able to access DSM in a browser by
+   visiting [[http://dsm.homelab.lan/]][fn:1]. However, your might see the port
+   in the URL:
+
+   #+caption: Port is still visible in the URL.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_173246_screenshot.png]]
+
+7. To redirect a subdomain (like =dsm.homelab.lan=) to an IP + port,
+   we need a reverse proxy. Click =Control Panel > Login Portal >
+   Advanced=, and choose =Reverse Proxy=. Here you can associate a
+   subdomain to a IP + port. In our case:
+
+   #+caption: Adding a reverse proxy entry for Synology DSM.
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
+   [[file:synology-domains/20251115_173711_screenshot.png]]
+
+   The port should not appear anymore when you access
+   [[http://dsm.homelab.lan/]].
+
+8. You can proceed like this for all your services: Docker containers
+   on the NAS, on a Rasperry Pi, etc., as long as you can already
+   access your resource using a local IP and a port.
+
+* Footnotes
+
+[fn:1] If you simply type =dsm.homelab.lan=, add a final slash, or the
+browser might not try to reach that URL (=.lan= is not recognized as a
+[[https://en.wikipedia.org/wiki/Top-level_domain][top-level domain]]).

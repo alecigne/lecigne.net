@@ -2,8 +2,7 @@
 #+subtitle: Anthony Le Cigne's personal website
 #+options: num:nil
 
-Welcome to my (rather minimalistic) website. You're browsing
-[[https://github.com/alecigne/lecigne.net/tree/v2025-10-25][v2025-10-25]].
+Welcome to my (rather minimalistic) website.
 
 Since it was "under construction" for years, I decided to simply use
 it for [[file:notes/notes.org][public notes]] and let it evolve organically from there, in both

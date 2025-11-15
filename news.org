@@ -6,6 +6,14 @@
 :CREATED:  [2025-01-13 Mon 23:55]
 :END:
 
+** [2025-11-15 Sat]
+:PROPERTIES:
+:CREATED:  [2025-11-15 Sat 18:08]
+:END:
+
+A new [[file:notes/synology-domains.org][note]] about setting up local domains on a LAN using a Synology
+NAS.
+
 ** [2025-10-25 Sat]
 :PROPERTIES:
 :CREATED:  [2025-10-25 Sat 13:13]
