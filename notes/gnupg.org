@@ -1,5 +1,6 @@
 #+title: GnuPG notes
 #+author: Anthony Le Cigne
+#+options: num:nil
 
 * Syntax
 

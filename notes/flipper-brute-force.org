@@ -15,7 +15,7 @@ for interaction with access control systems.
 
 Here it is in all its glory:
 
-#+attr_html: :width 600 :style border:2px solid black;
+#+attr_html: :width 600 :class image-shadow :style border:1px solid #ddd;
 [[file:flipper/flipper.jpg]]
 
 More specifically, the Flipper is capable of transmitting and
@@ -54,28 +54,28 @@ application.
 
 1. Go to Main Menu -> Sub-GHz.
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/sub_ghz_menu.png]]
 
 2. Press "Read".
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/read_menu.png]]
 
 3. The Flipper will wait for a signal.
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/capture.png]]
 
 4. Press the button on the remote control you want to read. If
    successful, a screen like this will be displayed:
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/captured_key1.png]]
 
    Clicking on it will display more details:
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/captured_key2.png]]
 
    The "Yek", as its name suggests, is simply the reversed key:
@@ -127,17 +127,17 @@ This time, we're going to replicate the process above but using the
 
 1. In the Sub-GHz application, press "Read RAW".
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/read_raw_menu.png]]
 
 2. The Flipper will be waiting for you to record.
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/capture_raw.png]]
 
 3. Press REC then Stop, and save the raw file.
 
-   #+attr_html: :style border:2px solid black;
+   #+attr_html: :class image-shadow :style border:1px solid #ddd;
    [[file:flipper/capture_raw_signal_2.png]]
 
 * Analyzing the raw =.sub= file
@@ -191,7 +191,7 @@ We can strenghten that first impression using a regex search in our
 text editor that highlights all 3-digits number, either positive or
 negative:
 
-#+attr_html: :style border:2px solid black; :width 600
+#+attr_html: :width 600 :class image-shadow :style border:1px solid #ddd;
 [[file:flipper/3-digit.png]]
 
 Yep, lots of consecutive 3-digits numbers. Moreover, it seems that the

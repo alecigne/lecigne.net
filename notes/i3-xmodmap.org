@@ -1,5 +1,6 @@
 #+title: i3 and xmodmap
 #+author: Anthony Le Cigne
+#+options: num:nil
 
 Maybe you tried to do something like this in your i3 config file:
 
