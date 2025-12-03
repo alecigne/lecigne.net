@@ -1,6 +1,6 @@
 #+title: Themes
 
-- "Exploration"
+- "Exploration" -- you will find a few pictures in my [[https://lecigne.net/blog/][visual feed]].
   + Climbing
   + Alpinism
   + Bike touring (especially in semi or full autonomy)

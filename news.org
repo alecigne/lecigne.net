@@ -6,6 +6,15 @@
 :CREATED:  [2025-01-13 Mon 23:55]
 :END:
 
+** [2025-12-03 Wed]
+:PROPERTIES:
+:CREATED:  [2025-12-03 Wed 21:21]
+:END:
+
+❄️❄️❄️
+
+I created a [[https://lecigne.net/blog/][feed]] section, a visual feed/photo journal.
+
 ** [2025-11-15 Sat]
 :PROPERTIES:
 :CREATED:  [2025-11-15 Sat 18:08]
