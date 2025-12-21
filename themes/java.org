@@ -1,0 +1,24 @@
+#+title: Java
+#+options: num:nil
+
+Since 2018, Java has been my primary [[https://fr.linkedin.com/in/anthonylecigne][professional language]], with most
+of my work done using Spring and Micronaut.
+
+* Related
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun]
+:END:
+
+** Projects
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:43]
+:END:
+
+- [[https://github.com/alecigne/somafm-recentlib][somafm-recentlib]] ::  A Java library that retrieves recently played
+  tracks from [[https://somafm.com/][SomaFM]].
+
+- [[https://github.com/alecigne/deezer-datasync][deezer-datasync]] :: Java application that backups data from
+  Deezer. In its current state, it calls Deezer (their API still
+  works), and makes a commit in a private repository. A GitHub repo as
+  persistence can feel weird, but it's very practical since I can
+  check the diff easily and I have nothing to self-host.

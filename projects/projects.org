@@ -1,12 +1,45 @@
 #+title: Projects
 
+A list of personal projects. Some projects have been integrated to
+this website, others are simple links to external resources (GitHub,
+etc.).
+
 * Code
 :PROPERTIES:
 :CREATED:  [2025-01-18 Sat 23:57]
 :END:
 
+** Java
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:20]
+:END:
+
+- [[https://github.com/alecigne/somafm-recentlib][somafm-recentlib]] ::  A Java library that retrieves recently played
+  tracks from [[https://somafm.com/][SomaFM]].
+
+- [[https://github.com/alecigne/deezer-datasync][deezer-datasync]] :: Java application that backups data from
+  Deezer. In its current state, it calls Deezer (their API still
+  works), and makes a commit in a private repository. A GitHub repo as
+  persistence can feel weird, but it's very practical since I can
+  check the diff easily and I have nothing to self-host.
+
+** Lisp
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:20]
+:END:
+
+- [[https://github.com/alecigne/xkcd-geohashing.el][xkcd-geohashing.el]] :: An implementation of XKCD's [[https://geohashing.site/][geohashing]]
+  algorithm for Emacs.
+
 - [[file:fennel-sandbox/README.org][fennel-sandbox]] :: Code written while learning [[https://fennel-lang.org/][Fennel]], in particular
   for the [[https://tic80.com/][TIC-80]] fantasy console. ([[https://github.com/alecigne/fennel-sandbox][GitHub]])
+
+** Emacs
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:26]
+:END:
+
+- [[https://github.com/alecigne/.emacs.d][.emacs.d]] :: My Emacs config 🙂
 
 * Misc
 :PROPERTIES:
@@ -16,9 +49,47 @@
 - [[file:gralhix-osint-exercises/README.org][gralhix-osint-exercises]] :: My solutions to Sofia Santos' OSINT
   exercises!
 
+* Projects I rely on
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 12:19]
+:END:
+
+An evergrowing, alphabetical list of projects I actively use and
+support one way or another.
+
+These projects are made possible by a myriad of sometimes unpaid
+volunteers. Please support them for a more free and open world!
+
+** Software
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 12:22]
+:END:
+
+- [[https://www.debian.org/][Debian]], an operating system.
+- [[https://www.gnu.org/software/emacs/][Emacs]], a text editor.
+- [[https://www.gnu.org/][GNU]], a collection of free software and an operating system.
+- [[https://i3wm.org/][i3]], a window manager.
+- [[https://www.kernel.org/][Linux]], an open source kernel.
+- [[https://www.passwordstore.org/][pass]], the standard unix password manager.
+- [[https://signal.org/][Signal]], a messaging application.
+- [[https://termux.dev/][Termux]], a terminal emulator for Android.
+- [[https://github.com/tmux/tmux/wiki][tmux]], a terminal multiplexer.
+- [[https://www.wireguard.com/][WireGuard]], an open source VPN solution.
+
+...and so many others.
+
+** Other
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 12:22]
+:END:
+
+- [[https://gpx.studio/][gpx.studio]], an online GPX file editor.
+- [[https://www.openstreetmap.org/][OpenStreetMap]], a free, editable map of the world.
+- [[https://somafm.com/][SomaFM]], a listener-supported, commercial-free, underground webradio.
+
 * Config                                                           :noexport:
 :PROPERTIES:
 :CREATED:  [2025-01-18 Sat 23:59]
 :END:
 
-#+options: num:nil toc:nil
+#+options: num:nil toc:1

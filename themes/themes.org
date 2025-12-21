@@ -1,26 +1,42 @@
 #+title: Themes
 
 - "Exploration" -- you will find a few pictures in my [[https://lecigne.net/blog/][visual feed]].
+
   + Climbing
   + Alpinism
   + Bike touring (especially in semi or full autonomy)
   + Hiking (especially in semi or full autonomy)
   + Sailing
   + [[https://geohashing.site/][Geohashing]]
+
 - Sports
+
   + Running
   + Climbing
   + Cycling
   + Callisthenics
-- [[file:radio.org][All things radio]] (ham radio, Software-Defined Radio, etc.)
-  + Morse code (yep, nerd...)
+
+- [[file:radio.org][All things radio]]
+
+  + Software-Defined Radio, especially with the [[https://en.wikipedia.org/wiki/HackRF_One][HackRF One]]
+  + Ham radio
+  + Morse code
+
 - Computing, programming & co
-  + [[file:emacs.org][Emacs]]
+
+  + [[file:java.org][Java]]
   + [[file:lisp.org][Lisp]]
+  + [[file:emacs.org][Emacs]]
   + [[file:linux.org][Linux]] (& co)
+
 - Meditation
+
 - Astronomy
+
 - Maps and cartography
+
 - [[file:osint.org][OSINT]]
+
 - Freediving
+
 - etc.

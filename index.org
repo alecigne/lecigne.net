@@ -4,9 +4,10 @@
 
 Welcome to my (rather minimalistic) website.
 
-Since it was "under construction" for years, I decided to simply use
+Since it was "[[https://en.wikipedia.org/wiki/Procrastination][under construction]]" for years, I decided to simply use
 it for [[file:notes/notes.org][public notes]] and let it evolve organically from there, in both
-form and content.
+form and content. This is a space of free expression, not
+perfection. Publish fast, arrange later!
 
 There is no comment section, but if you feel like dropping a word, you
 can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions section]] of the corresponding [[https://github.com/alecigne/lecigne.net][GitHub repo]].
@@ -22,20 +23,25 @@ can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions s
 - [[file:notes/notes.org][Notes]]: just because "articles" was a bit too pompous, but that's
   what they are -- reference documents that can evolve with time.
 
-- [[file:projects/projects.org][Projects]]: projects, or "microsites" as I call them, are independant
-  GitHub repositories that use the same documentation format as this
-  website ([[https://orgmode.org/][Org mode]]). They're "injected" into this website during the
-  publishing process which, of course, is taken care of by the One
-  True Editor -- [[https://www.gnu.org/software/emacs/][Emacs]].
+- [[file:projects/projects.org][Projects]]: a list of projects. Some of them are integrated to the
+  website itself as "microsites": independant repositories that use
+  the same documentation format as this website ([[https://orgmode.org/][Org mode]]) and are
+  "injected" during the publishing process which, of course, is taken
+  care of by the One True Editor -- [[https://www.gnu.org/software/emacs/][Emacs]].
 
 - [[file:themes/themes.org][Themes]]: a few pages describing my main centers of interest, with
-  backlinks that refer to notes
+  backlinks.
 
 And a little bit separated from the rest, including visually:
 
 - The [[https://lecigne.net/blog/][feed]] section, just a visual feed.
 
-* About me
+* About
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:44]
+:END:
+
+** ...me
 
 Since 2018, I am working as a [[https://fr.linkedin.com/in/anthonylecigne][software engineer]], using mainly Java. In
 a past life, I worked in cancer research -- I received a PhD in
@@ -47,10 +53,15 @@ A few things I'm interested in and you might read about, /one day/, on
 this website, in no particular order, is available in the [[file:themes/themes.org][themes]] page,
 with links to content when available.
 
-* About the website
+** ...the website
 
-These pages have been written with [[https://www.gnu.org/software/emacs/][Emacs]] [[https://orgmode.org/][Org-mode]]. The publishing
-process is fully automatic, using Emacs in batch mode:
+These pages have been written with [[https://www.gnu.org/software/emacs/][Emacs]] [[https://orgmode.org/][Org-mode]].
+
+#+caption: A cozy environment 🍵
+#+attr_html: :width 600 :class image-shadow :style border:1px solid #ddd;
+[[file:assets/emacs_org.png]]
+
+The publishing process is fully automatic, using Emacs in batch mode:
 
 1. The [[https://github.com/alecigne/lecigne.net][website itself]], a network of Org files kept under version
    control, is "augmented" with other Org [[file:projects/projects.org][projects]] (or "microsites").

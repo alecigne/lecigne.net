@@ -8,5 +8,17 @@ The almighty [[https://www.gnu.org/software/emacs/][GNU editor]]! You can find m
 :CREATED:  [2024-07-13 Sat 12:52]
 :END:
 
+** Projects
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:41]
+:END:
+
+- [[https://github.com/alecigne/.emacs.d][.emacs.d]] :: My Emacs config 🙂
+
+** Notes
+:PROPERTIES:
+:CREATED:  [2025-12-21 Sun 11:41]
+:END:
+
 - [[file:../notes/compiling-emacs.org][Compiling Emacs]] :: A little personal reminder on how I usually
   compile Emacs.
