@@ -32,9 +32,13 @@ can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions s
 - [[file:themes/themes.org][Themes]]: a few pages describing my main centers of interest, with
   backlinks.
 
-And a little bit separated from the rest, including visually:
+And a little bit separated from the rest, including visually, some
+experimental sections:
 
 - The [[https://lecigne.net/blog/][feed]] section, just a visual feed.
+
+- [[https://lecigne.net/atod/][ATOD]], Ambient Track of the Day -- your daily pick of ambient
+  music. Inspired by NASA's [[https://apod.nasa.gov/apod/astropix.html][Astronomy Picture of the Day]]!
 
 * About
 :PROPERTIES:
