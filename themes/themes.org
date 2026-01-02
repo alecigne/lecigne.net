@@ -4,8 +4,8 @@
 
   + Climbing
   + Alpinism
-  + Bike touring (especially in semi or full autonomy)
-  + Hiking (especially in semi or full autonomy)
+  + Bike touring
+  + Hiking
   + Sailing
   + [[https://geohashing.site/][Geohashing]]
 
@@ -29,6 +29,8 @@
   + [[file:emacs.org][Emacs]]
   + [[file:linux.org][Linux]] (& co)
 
+- [[https://lecigne.net/atod/][Ambient music]]
+
 - Meditation
 
 - Astronomy
@@ -36,7 +38,5 @@
 - Maps and cartography
 
 - [[file:osint.org][OSINT]]
-
-- Freediving
 
 - etc.
