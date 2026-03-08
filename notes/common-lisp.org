@@ -2,6 +2,9 @@
 #+author: Anthony Le Cigne
 #+options: num:nil
 
+#+attr_html: :width 300
+[[file:lisp/lisp.png]]
+
 Setting up a Common Lisp environment is not easy for beginners. In
 this note[fn:1], we will take a logical and progressive approach:
 
