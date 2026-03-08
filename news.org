@@ -1,6 +1,25 @@
 #+title: News
 #+options: num:nil
 
+* 2026
+:PROPERTIES:
+:CREATED:  [2026-03-08 Sun 21:47]
+:END:
+
+** [2026-03-08 Sun]
+:PROPERTIES:
+:CREATED:  [2026-03-08 Sun 21:47]
+:END:
+
+Long time no see! Spring is already coming 🌱, [[https://lecigne.net/atod/][ATOD]] is still going
+strong, and it's the perfect time of the year to hack in Lisp, with
+ambient music in your ears.
+
+After resurrecting my [[https://github.com/alecigne/.stumpwm.d][StumpWM environment]], I took the opportunity to
+update the note about [[file:notes/common-lisp.org][setting up a Common Lisp environment]].
+
+See you in summer? 🙃
+
 * 2025
 :PROPERTIES:
 :CREATED:  [2025-01-13 Mon 23:55]
