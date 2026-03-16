@@ -332,9 +332,20 @@ If it loads, perfect -- go to the next section 🙂
 * StumpWM
 
 [[https://github.com/stumpwm/stumpwm][StumpWM]] is a fantastic window manager written and configurable in
-Common Lisp. We will build it from source.
+Common Lisp. My own configuration is available [[https://github.com/alecigne/.stumpwm.d][here]], as an ASDF
+system.
 
-You can also check [[https://wiki.archlinux.org/title/Stumpwm][this page]] on ArchWiki.
+We will build StumpWM from source. You can also check [[https://wiki.archlinux.org/title/Stumpwm][this page]] on
+ArchWiki.
+
+Again, here's an important quote from the StumpWM README:
+
+#+begin_quote
+Please do /not/ install SBCL using your distributions package manager,
+especially Ubuntu. If you do so it is likely that you'll run into
+problems when building StumpWM due to using obsolete versions of the
+dependencies.
+#+end_quote
 
 1. Clone the StumpWM repository:
 
@@ -342,7 +353,7 @@ You can also check [[https://wiki.archlinux.org/title/Stumpwm][this page]] on Ar
      git clone https://github.com/stumpwm/stumpwm
    #+end_src
 
-2. Install the dependencies in SBCL/Sly:
+2. Install the dependencies in SBCL:
 
    #+begin_src lisp
      (ql:quickload '("clx" "cl-ppcre" "alexandria"))
@@ -365,7 +376,7 @@ You can also check [[https://wiki.archlinux.org/title/Stumpwm][this page]] on Ar
 5. I start StumpWM with:
 
    #+begin_src sh
-     WM=stumpwm startx
+     startx
    #+end_src
 
   Here's the corresponding =~/.xinitrc= file; adapt it to your own
@@ -374,7 +385,7 @@ You can also check [[https://wiki.archlinux.org/title/Stumpwm][this page]] on Ar
    #+begin_src bash
      #!/bin/sh
 
-     WM="${WM:-i3}"
+     WM="${WM:-stumpwm}"
 
      case "$WM" in
        stumpwm)
