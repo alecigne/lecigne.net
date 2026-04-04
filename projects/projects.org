@@ -17,6 +17,9 @@ etc.).
 - [[https://github.com/alecigne/somafm-recentlib][somafm-recentlib]] ::  A Java library that retrieves recently played
   tracks from [[https://somafm.com/][SomaFM]].
 
+- [[https://github.com/alecigne/somafm-song-history][somafm-song-history]] :: A Java application that checks and persists
+  broadcasts from SomaFM by integrating the library above.
+
 - [[https://github.com/alecigne/deezer-datasync][deezer-datasync]] :: Java application that backups data from
   Deezer. In its current state, it calls Deezer (their API still
   works), and makes a commit in a private repository. A GitHub repo as
