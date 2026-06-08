@@ -1,5 +1,6 @@
 #+title: Notes
 
+- [[file:wireguard.org][A few useful WireGuard commands]]
 - [[file:accessing-synology.org][Accessing a Synology NAS without a router]]
 - [[file:compiling-emacs.org][Compiling Emacs]]
 - [[file:signal-export.org][Exporting Signal backups to various formats]]

@@ -1,0 +1,209 @@
+#+title: A few useful WireGuard commands
+#+author: Anthony Le Cigne
+#+options: num:nil
+
+This page is a personal reminder about [[https://www.wireguard.com/][WireGuard]] commands I use
+frequently. WireGuard is...
+
+#+begin_quote
+[...] an extremely simple yet fast and modern VPN that utilizes
+state-of-the-art cryptography.
+#+end_quote
+
+* Terminology
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 19:28]
+:END:
+
+In my personal experience, in a WireGuard network, there's an "always
+on" peer (the "server", like a VPS) and "client" peers that initiate
+the connection to the server. This is why the client/server
+terminology is used below, but WireGuard isn't inherently
+centralized. [[https://tailscale.com/][Tailscale]], which is built on top of WireGuard, is
+actually a [[https://tailscale.com/learn/understanding-mesh-vpns][mesh VPN]].
+
+* Generating keys
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 14:32]
+:END:
+
+Generating keys is mandatory for all peers. You can generate these
+keys anywhere, on the peer itself or on another computer, as long as
+the private key stays secure.
+
+#+begin_src bash
+  wg genkey | tee private.key | wg pubkey > public.key
+#+end_src
+
+Then:
+
+#+begin_src bash
+  chmod 600 private.key
+#+end_src
+
+- =wg genkey= generates a new private key and prints it to stdout.
+
+- =| tee private.key= saves that private key into =private.key= and
+  also passes it onward through the pipe.
+
+- =| wg pubkey= reads the private key from stdin and derives the
+  corresponding public key.
+
+- => public.key= writes the public key into public.key.
+
+- =chmod 600 private.key= restricts the private key file to its owner.
+
+* Server config
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 14:59]
+:END:
+
+Usually, you would begin with the "server", only specifying an
+interface, without peers since you didn't define any:
+
+#+begin_src conf
+  [Interface]
+  Address = 10.8.0.1/24
+  ListenPort = 51820
+  PrivateKey = ${SERVER_PRIVATE_KEY}
+#+end_src
+
+- =Address = 10.8.0.1/24= assigns 10.8.0.1/24 to this interface and
+  treats 10.8.0.0/24 as directly reachable from it.
+
+  For the address range, choose any *unused* private subnet, commonly
+  one from RFC1918.
+
+- =ListenPort = 51820= is the UDP port WireGuard listens on. 51820 is
+  WireGuard's common default.
+
+- =${SERVER_PRIVATE_KEY}= is the server's private key you
+  generated. It will be used by the server to decrypt traffic that is
+  sent by peers, who themselves will encrypt traffic using the
+  server's public key.
+
+* Client config
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 15:00]
+:END:
+
+Generate keys for the client and create the config:
+
+#+begin_src conf
+  [Interface]
+  Address = 10.8.0.2/32
+  PrivateKey = ${CLIENT_PRIVATE_KEY}
+  DNS = 10.8.0.1
+
+  [Peer]
+  Endpoint = 203.0.113.10:51820
+  PublicKey = ${SERVER_PUBLIC_KEY}
+  AllowedIPs = 10.8.0.1/32
+  PersistentKeepalive = 25
+#+end_src
+
+- =Address = 10.8.0.2/32= is the WireGuard interface IP address on the
+  client.
+
+- =${CLIENT_PRIVATE_KEY}= is the client's private key.
+
+- =DNS = 10.8.0.1= is optional: if specified, DNS requests will be
+  routed through the WireGuard server when WireGuard is up. If you are
+  targeting a server on which a custom DNS (like =dnsmasq=) resolves
+  private URLs (such as =application.vps.internal=), this can be
+  useful.
+
+- =Endpoint = 203.0.113.10:51820= is the remote IP or host name of the
+  server, with the WireGuard port. =203.0.113.10= is just a random
+  example, replace it with your server's public IP address or DNS
+  name.
+
+- =${SERVER_PUBLIC_KEY}= is the server public key. It will be used to
+  encrypt traffic towards the server.
+
+- =AllowedIPs= is important: it defines what traffic will go through
+  WireGuard. Here, only traffic to the WireGuard IP of the server
+  (=10.8.0.1/32=) will go through WireGuard. The =/32= means "this
+  exact IPv4 address only", instead of the whole =10.8.0.0/24=
+  subnet. Use the whole subnet if you already know you will add more
+  peers and you want to reach them through the server ("hub-and-spoke"
+  configuration).
+
+  If you want all client traffic to go through the VPN, use
+  =AllowedIPs = 0.0.0.0/0, ::/0= instead. In that case, the VPS also
+  needs to forward traffic, and usually needs NAT, for the client to
+  reach the public internet through it.
+
+* Adding the peer to the server config
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 15:05]
+:END:
+
+Once your client is ready, add it to the server config:
+
+#+begin_src conf
+  # Already defined above -------------|
+  [Interface]                        # |
+  Address = 10.8.0.1/24              # |
+  ListenPort = 51820                 # |
+  PrivateKey = ${SERVER_PRIVATE_KEY} # |
+  # -----------------------------------|
+
+  # ${CLIENT_NAME}
+  [Peer]
+  PublicKey = ${CLIENT_PUBLIC_KEY}
+  AllowedIPs = 10.8.0.2/32
+#+end_src
+
+Here too, =/32= means that this peer is only allowed to use
+=10.8.0.2=. If you add more clients later, each one should get its own
+IP address and its own =/32= route.
+
+Restart WireGuard on the server:
+
+#+begin_src bash
+  sudo systemctl restart [service]
+#+end_src
+
+* Generating QR codes
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 15:08]
+:END:
+
+The WireGuard Android application supports importing a config as a QR
+code. Let's say you generated a client config on your computer, then
+added the peer to your server, and now you want to import that client
+config on your phone.
+
+Generate a QR code:
+
+#+begin_src bash
+  qrencode -o wg0.png < wg0.conf
+#+end_src
+
+For terminal scanning, also print the QR code directly:
+
+#+begin_src bash
+  qrencode -t ansiutf8 < wg0.conf
+#+end_src
+
+Check the PNG:
+
+#+begin_src bash
+  zbarimg -q wg0.png
+#+end_src
+
+Import the PNG on your phone, connect, and check on the server after
+connecting:
+
+#+begin_src bash
+  sudo wg show
+#+end_src
+
+* See also
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 19:16]
+:END:
+
+You (and I 😄) should take a look at [[https://tailscale.com/][Tailscale]], which is built on
+WireGuard.

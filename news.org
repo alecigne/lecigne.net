@@ -6,6 +6,13 @@
 :CREATED:  [2026-03-08 Sun 21:47]
 :END:
 
+** [2026-06-08 Mon]
+:PROPERTIES:
+:CREATED:  [2026-06-08 Mon 19:20]
+:END:
+
+A very quick [[file:notes/wireguard.org][note]] about useful [[https://www.wireguard.com/][WireGuard]] commands I use frequently.
+
 ** [2026-03-08 Sun]
 :PROPERTIES:
 :CREATED:  [2026-03-08 Sun 21:47]
