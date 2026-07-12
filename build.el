@@ -2,6 +2,7 @@
 
 (setq make-backup-files nil
       org-html-validation-link nil
+      org-html-head-include-default-style nil
       org-html-htmlize-output-type 'nil)
 
 (setq alc-html-preamble

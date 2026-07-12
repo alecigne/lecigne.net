@@ -38,8 +38,57 @@ h1, h2, h3, h4, h5 {
     line-height: 1.2;
 }
 
+.title {
+    margin-bottom: 0.2em;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: medium;
+    font-weight: bold;
+    margin-top: 0;
+    text-align: center;
+}
+
+.todo, .done, .priority, .tag {
+    font-family: monospace;
+}
+
+.todo { color: red; }
+.done { color: green; }
+.priority { color: orange; }
+
+.tag {
+    background-color: #eee;
+    font-size: 80%;
+    font-weight: normal;
+    padding: 2px;
+}
+
+.timestamp { color: #bebebe; }
+.timestamp-kwd { color: #5f9ea0; }
+.underline { text-decoration: underline; }
+
+.org-right { margin-left: auto; margin-right: 0; text-align: right; }
+.org-left { margin-left: 0; margin-right: auto; text-align: left; }
+.org-center { margin-left: auto; margin-right: auto; text-align: center; }
+
+#postamble p, #preamble p {
+    font-size: 90%;
+    margin: 0.2em;
+}
+
+p.verse { margin-left: 3%; }
+
 pre {
+    background-color: #f2f2f2;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    font-family: monospace;
     font-size: 12px;
+    margin: 1.2em;
+    overflow: auto;
+    padding: 8pt;
 }
 
 pre.src {
@@ -48,13 +97,75 @@ pre.src {
     overflow: auto;
 }
 
+pre.src::before {
+    background-color: rgba(242, 242, 242, 0.6);
+    color: #555;
+    content: attr(data-language);
+    display: none;
+    padding: 3px;
+    position: absolute;
+    right: 12px;
+    top: 6px;
+}
+
+pre.src:hover::before {
+    display: inline;
+}
+
 pre.src.hljs {
     background-color: #f2f2f2;
 }
 
 dt {
+  font-weight: bold;
   margin-top: 1em;
 }
+
+table { border-collapse: collapse; }
+caption.t-above { caption-side: top; }
+caption.t-bottom { caption-side: bottom; }
+td, th { vertical-align: top; }
+th.org-right, th.org-left, th.org-center { text-align: center; }
+td.org-right { text-align: right; }
+td.org-left { text-align: left; }
+td.org-center { text-align: center; }
+
+.footpara { display: inline; }
+.footdef { margin-bottom: 1em; }
+
+.figure { padding: 1em; }
+.figure p { text-align: center; }
+
+.equation-container {
+  display: table;
+  text-align: center;
+  width: 100%;
+}
+
+.equation { vertical-align: middle; }
+
+.equation-label {
+  display: table-cell;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.inlinetask {
+  background: #ffffcc;
+  border: 2px solid gray;
+  margin: 10px;
+  padding: 10px;
+}
+
+#org-div-home-and-up {
+  font-size: 70%;
+  text-align: right;
+  white-space: nowrap;
+}
+
+textarea { overflow-x: auto; }
+.linenr { font-size: smaller; }
+.code-highlighted { background-color: #ffff00; }
 
 .topnav {
   display: flow-root;

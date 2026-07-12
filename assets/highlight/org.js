@@ -8,6 +8,15 @@
     'lisp': 'lisp',
     'sh': 'bash'
   };
+  var languageLabels = {
+    'bash': 'Bash',
+    'conf': 'Configuration File',
+    'elisp': 'Emacs Lisp',
+    'emacs-lisp': 'Emacs Lisp',
+    'fennel': 'Fennel',
+    'lisp': 'Lisp',
+    'sh': 'Shell'
+  };
 
   function highlightOrgBlocks() {
     document.querySelectorAll('pre.src').forEach(function (block) {
@@ -20,6 +29,10 @@
       });
 
       var language = languageAliases[orgLanguage] || orgLanguage;
+      if (orgLanguage) {
+        block.dataset.language = languageLabels[orgLanguage] || orgLanguage;
+      }
+
       if (language && hljs.getLanguage(language)) {
         block.classList.add('language-' + language);
       }
