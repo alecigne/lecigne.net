@@ -1,6 +1,6 @@
 #+title: Themes
 
-- "Exploration" -- you will find a few pictures in my [[https://lecigne.net/blog/][visual feed]].
+- "Exploration" -- you will find a few pictures in my [[https://lecigne.net/feed/][visual feed]].
 
   + Climbing
   + Alpinism
