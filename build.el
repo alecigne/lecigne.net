@@ -17,23 +17,25 @@
       `(("org-static"
          :base-directory "./"
          :base-extension "png\\|jpg\\|gif\\|ico\\|css\\|js"
-         :publishing-directory "~/pub/lecigne.net/"
+         :publishing-directory "./build/"
+         :exclude "\\`build/"
          :recursive t
          :publishing-function org-publish-attachment)
         ("org-html"
          :base-directory "./"
          :base-extension "org"
-         :publishing-directory "~/pub/lecigne.net/"
+         :publishing-directory "./build/"
+         :exclude "\\`\\(?:build/\\|README\\.org\\'\\|todo\\.org\\'\\)"
          :recursive t
          :publishing-function org-html-publish-to-html
-	 :headline-levels 4
+         :headline-levels 4
          :with-toc nil
          :with-author nil
          :time-stamp-file nil
          :section-numbers t
          :html-head ,alc-org-export-html-head
          :html-preamble ,alc-html-preamble)
-	("website" :components ("org-html" "org-static"))))
+        ("website" :components ("org-html" "org-static"))))
 
-(defun alc-publish ()
+(defun alc-build ()
   (org-publish "website" t))

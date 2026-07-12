@@ -1,8 +1,10 @@
-publish:
-    emacs --script publish.el -f alc-publish
+build:
+    rm -rf build
+    emacs --script build.el -f alc-build
+    cp .htaccess build/.htaccess
 
-preview: publish
-    python3 -m http.server --bind 127.0.0.1 --directory ~/pub/lecigne.net/ 8000
+preview: build
+    python3 -m http.server --bind 127.0.0.1 --directory build/ 8000
 
-deploy:
-    rclone -v sync --exclude "/.git/" . OVH:www/
+deploy: build
+    rclone -v copy build/ OVH:www/

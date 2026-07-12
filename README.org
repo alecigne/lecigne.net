@@ -4,8 +4,10 @@ This is the source for my [[https://lecigne.net/][website]].
 
 [[https://github.com/casey/just][Just]] is used to execute predefined actions -- see [[file:Justfile][Justfile]].
 
-- =just publish= will publish the website (which means exporting it to
-  HTML, in Org-mode lingo) using Emacs -- see [[file:publish.el][publish.el]].
+- =just build= will export the website to the gitignored =build/= directory
+  using Emacs -- see [[file:build.el][build.el]].
 
-- =just deploy= will transfer the updated HTML files to my webserver
-  usin =rclone=.
+- =just preview= will build the website and serve it locally on port 8000.
+
+- =just deploy= will build the website and copy it to the webserver using
+  =rclone=. It does not delete independently managed remote files.
