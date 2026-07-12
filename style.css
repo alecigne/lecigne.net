@@ -40,7 +40,7 @@ dt {
 }
 
 .topnav {
-  overflow: hidden;
+  display: flow-root;
   background-color: white;
   position: fixed;
   top: 0;
@@ -49,7 +49,9 @@ dt {
   z-index: 99999;
 }
 
-.topnav a {
+.topnav > a,
+.topnav-button,
+.topnav-right a {
   font-family: 'Roboto', sans-serif;
   float: left;
   font-weight: bold;
@@ -61,7 +63,59 @@ dt {
   color: #444;
 }
 
-.topnav a:hover {
+.topnav-button {
+  background: white;
+  border: 0;
+  cursor: pointer;
+  float: none;
+  line-height: inherit;
+  list-style: none;
+}
+
+.topnav-button::-webkit-details-marker {
+  display: none;
+}
+
+.topnav > a:hover,
+.topnav-button:hover,
+.topnav-button:focus-visible,
+.topnav-right a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.topnav-dropdown {
+  float: left;
+  position: relative;
+}
+
+.topnav-dropdown-menu {
+  background: white;
+  border: 1px solid #444;
+  display: none;
+  min-width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.topnav-dropdown[open] .topnav-dropdown-menu {
+  display: block;
+}
+
+.topnav-dropdown-menu a {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 8px 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #444;
+}
+
+.topnav-dropdown-menu a:hover,
+.topnav-dropdown-menu a:focus-visible {
   background: #ddd;
   color: black;
 }

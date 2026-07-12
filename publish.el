@@ -8,15 +8,15 @@
       (org-babel-with-temp-filebuffer "./top-menu.html" (buffer-string)))
 
 (setq alc-org-export-html-head
-      (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://lecigne.net/style.css\"/>\n"
-              "<link rel=\"icon\" href=\"https://lecigne.net/favicon.ico\"/>"
+      (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\"/>\n"
+              "<link rel=\"icon\" href=\"/favicon.ico\"/>"
               "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">\n"
               "<link href=\"https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap\" rel=\"stylesheet\">"))
 
 (setq org-publish-project-alist
       `(("org-static"
          :base-directory "./"
-         :base-extension "png\\|jpg\\|gif\\|ico\\|css"
+         :base-extension "png\\|jpg\\|gif\\|ico\\|css\\|js"
          :publishing-directory "~/pub/lecigne.net/"
          :recursive t
          :publishing-function org-publish-attachment)
