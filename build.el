@@ -9,8 +9,12 @@
 
 (setq alc-org-export-html-head
       (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\"/>\n"
+              "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/highlight/github.min.css\"/>\n"
               "<link rel=\"preload\" href=\"/assets/fonts/roboto-latin.woff2\" as=\"font\" type=\"font/woff2\" crossorigin/>\n"
-              "<link rel=\"icon\" href=\"/favicon.ico\"/>"))
+              "<link rel=\"icon\" href=\"/favicon.ico\"/>\n"
+              "<script defer src=\"/assets/highlight/highlight.min.js\"></script>\n"
+              "<script defer src=\"/assets/highlight/lisp.min.js\"></script>\n"
+              "<script defer src=\"/assets/highlight/org.js\"></script>"))
 
 (setq org-publish-project-alist
       `(("org-static"

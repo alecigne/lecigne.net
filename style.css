@@ -48,6 +48,10 @@ pre.src {
     overflow: auto;
 }
 
+pre.src.hljs {
+    background-color: #f2f2f2;
+}
+
 dt {
   margin-top: 1em;
 }
