@@ -9,14 +9,13 @@
 
 (setq alc-org-export-html-head
       (concat "<link rel=\"stylesheet\" type=\"text/css\" href=\"/style.css\"/>\n"
-              "<link rel=\"icon\" href=\"/favicon.ico\"/>"
-              "<link href=\"https://fonts.googleapis.com/css2?family=Roboto&display=swap\" rel=\"stylesheet\">\n"
-              "<link href=\"https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap\" rel=\"stylesheet\">"))
+              "<link rel=\"preload\" href=\"/assets/fonts/roboto-latin.woff2\" as=\"font\" type=\"font/woff2\" crossorigin/>\n"
+              "<link rel=\"icon\" href=\"/favicon.ico\"/>"))
 
 (setq org-publish-project-alist
       `(("org-static"
          :base-directory "./"
-         :base-extension "png\\|jpg\\|gif\\|ico\\|css\\|js"
+         :base-extension "png\\|jpg\\|gif\\|ico\\|css\\|js\\|woff2\\|txt"
          :publishing-directory "./build/"
          :exclude "\\`build/"
          :recursive t
