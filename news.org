@@ -6,6 +6,25 @@
 :CREATED:  [2026-03-08 Sun 21:47]
 :END:
 
+** [2026-07-17 Fri]
+
+I made a few improvements to [[./atod/][ATOD]] (with more to come 🙂):
+
+- Archive search. Pretty intuitive in my opinion; you can even display
+  a given month by typing e.g. "2026-03".
+
+- Random track selection.
+
+- Navigation to the current track.
+
+- "Scroll-to-top" button (visible when you scroll down).
+
+- Link to NASA's [[https://apod.nasa.gov/apod/astropix.html][Astronomy Picture of the Day]] (APOD) for a
+  serendipitous aesthetic experience... even for me, since I can't
+  predict which picture NASA will choose!
+
+- Improvements to navigation controls and visual behavior.
+
 ** [2026-06-08 Mon]
 :PROPERTIES:
 :CREATED:  [2026-06-08 Mon 19:20]
