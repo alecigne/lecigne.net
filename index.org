@@ -35,10 +35,10 @@ can use the [[https://github.com/alecigne/lecigne.net/discussions][Discussions s
 And a little bit separated from the rest, including visually, are what
 I call "apps":
 
-- [[https://lecigne.net/feed/][Feed]] -- just a visual feed.
-
-- [[https://lecigne.net/atod/][ATOD]], Ambient Track of the Day -- your daily pick of ambient
+- [[./atod/][ATOD]], Ambient Track of the Day -- your daily pick of ambient
   music. Inspired by NASA's [[https://apod.nasa.gov/apod/astropix.html][Astronomy Picture of the Day]]!
+
+- [[./feed/][Feed]] -- just a visual feed.
 
 - And more to come.
 
