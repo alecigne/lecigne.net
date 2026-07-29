@@ -6,6 +6,17 @@
 :CREATED:  [2026-03-08 Sun 21:47]
 :END:
 
+** [2026-07-28 Tue]
+
+More improvements to [[./atod/][ATOD]]!
+
+This time it's a split between the player and archive layout for a
+better experience. No noticeable effect on mobile.
+
+Oh, and ATOD has its own [[https://github.com/alecigne/atod][GitHub repository]] -- empty for now since I
+need to clean up the code, but at least it's a good place to report
+[[https://github.com/alecigne/atod/issues][issues]] or simply start a [[https://github.com/alecigne/atod/discussions][discussion]].
+
 ** [2026-07-17 Fri]
 
 I made a few improvements to [[./atod/][ATOD]] (with more to come 🙂):
