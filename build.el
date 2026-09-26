@@ -42,4 +42,7 @@
         ("website" :components ("org-html" "org-static"))))
 
 (defun alc-build ()
+  (org-publish "website"))
+
+(defun alc-rebuild ()
   (org-publish "website" t))

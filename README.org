@@ -4,10 +4,35 @@ This is the source for my [[https://lecigne.net/][website]].
 
 [[https://github.com/casey/just][Just]] is used to execute predefined actions -- see [[file:Justfile][Justfile]].
 
-- =just build= will export the website to the gitignored =build/= directory
-  using Emacs -- see [[file:build.el][build.el]].
+- =just build= will incrementally export the website to the gitignored
+  =build/= directory using Emacs -- see [[file:build.el][build.el]]. Unchanged
+  output keeps its modification time so deployment can skip it.
+
+- =just rebuild= will remove =build/= and perform a full export. Use it
+  after changing shared publishing configuration or templates.
 
 - =just preview= will build the website and serve it locally on port 8000.
 
-- =just deploy= will build the website and copy it to the webserver using
-  =rclone=. It does not delete independently managed remote files.
+- =just deploy-check= will build the website and preview the files that
+  would be transferred to the webserver.
+
+- =just deploy= will build the website and transfer it to the webserver.
+
+Deployment uses =rclone='s SFTP backend, configured entirely through a
+local, gitignored =.env= file:
+
+#+begin_src conf
+  DEPLOY_TARGET=user@host
+  DEPLOY_PATH=path/
+#+end_src
+
+=rclone= must be installed locally. No password or =rclone=
+configuration is stored: it prompts for the SSH password when a recipe
+runs. It validates the server's =ssh-ed25519= key using
+=~~/.ssh/known_hosts= and does not attempt to execute remote shell
+commands.
+
+Deployment compares file sizes and modification times. Incremental
+builds preserve the timestamps of unchanged output, so those files are
+skipped. Both recipes use =rclone copy= rather than =sync=, so files and
+directories that exist only on the webserver are never deleted.
