@@ -6,6 +6,15 @@
 :CREATED:  [2026-03-08 Sun 21:47]
 :END:
 
+** [2026-09-26 Sat]
+:PROPERTIES:
+:CREATED:  [2026-09-26 Sat 15:15]
+:END:
+
+- I updated the [[file:projects/projects.org][projects]] page and the [[file:themes/themes.org][themes section]].
+
+- I added pictures taken during a stay in Quebec in 2023 to the [[./feed/][feed]].
+
 ** [2026-07-28 Tue]
 
 More improvements to [[./atod/][ATOD]]!

@@ -1,35 +1,37 @@
 #+title: Themes
 
-- "Exploration" -- you will find a few pictures in my [[https://lecigne.net/feed/][visual feed]].
+A non-exhaustive list of subjects I keep coming back to. Some themes
+link to pages collecting related notes and projects.
 
-  + Climbing
+- Exploration (with a few pictures in my [[../feed/][visual feed]])
+
   + Alpinism
   + Bike touring
+  + Climbing
+  + [[https://geohashing.site/][Geohashing]]
   + Hiking
   + Sailing
-  + [[https://geohashing.site/][Geohashing]]
 
 - Sports
 
-  + Running
-  + Climbing
+  + Calisthenics
   + Cycling
-  + Callisthenics
+  + Running
 
-- [[file:radio.org][All things radio]]
+- [[file:radio.org][Radio]]
 
   + Software-Defined Radio, especially with the [[https://en.wikipedia.org/wiki/HackRF_One][HackRF One]]
   + Ham radio
   + Morse code
 
-- Computing, programming & co
+- Computing and programming
 
+  + [[file:emacs.org][Emacs]]
   + [[file:java.org][Java]]
   + [[file:lisp.org][Lisp]]
-  + [[file:emacs.org][Emacs]]
-  + [[file:linux.org][Linux]] (& co)
+  + [[file:linux.org][Linux]] and related tools
 
-- [[https://lecigne.net/atod/][Ambient music]]
+- [[../atod/][Ambient music]]
 
 - Meditation
 
@@ -38,5 +40,3 @@
 - Maps and cartography
 
 - [[file:osint.org][OSINT]]
-
-- etc.

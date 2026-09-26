@@ -1,94 +1,95 @@
 #+title: Projects
 
-A list of personal projects. Some projects have been integrated to
-this website, others are simple links to external resources (GitHub,
-etc.).
+A curated list of personal projects, grouped by what they do rather
+than by the language they are written in. Some are published here as
+microsites; the others link to their GitHub repositories. More can be
+found on my [[https://github.com/alecigne?tab=repositories][GitHub profile]].
 
-* Code
+* My projects
 :PROPERTIES:
 :CREATED:  [2025-01-18 Sat 23:57]
 :END:
 
-** Java
+** Development tools and environments
 :PROPERTIES:
-:CREATED:  [2025-12-21 Sun 11:20]
+:CREATED:  [2026-09-26 Sat]
 :END:
 
-- [[https://github.com/alecigne/somafm-recentlib][somafm-recentlib]] ::  A Java library that retrieves recently played
+- [[https://github.com/alecigne/codex-sandbox][codex-sandbox]] :: A personal development environment for [[https://github.com/openai/codex][Codex CLI]],
+  powered by rootless [[https://podman.io/][Podman]]. It exposes only explicitly selected
+  working directories while keeping Codex's own Linux sandbox enabled.
+
+- [[https://github.com/alecigne/.emacs.d][.emacs.d]] :: My Emacs configuration 🙂
+
+** Music and data
+:PROPERTIES:
+:CREATED:  [2026-09-26 Sat]
+:END:
+
+- [[https://github.com/alecigne/somafm-recentlib][somafm-recentlib]] :: A Java library that retrieves recently played
   tracks from [[https://somafm.com/][SomaFM]].
 
-- [[https://github.com/alecigne/somafm-song-history][somafm-song-history]] :: A Java application that checks and persists
-  broadcasts from SomaFM by integrating the library above.
+- [[https://github.com/alecigne/somafm-song-history][somafm-song-history]] :: A Java application that archives SomaFM
+  broadcasts using =somafm-recentlib=.
 
-- [[https://github.com/alecigne/deezer-datasync][deezer-datasync]] :: Java application that backups data from
-  Deezer. In its current state, it calls Deezer (their API still
-  works), and makes a commit in a private repository. A GitHub repo as
-  persistence can feel weird, but it's very practical since I can
-  check the diff easily and I have nothing to self-host.
+- [[https://github.com/alecigne/deezer-datasync][deezer-datasync]] :: A Java application that backs up my Deezer data
+  to a private GitHub repository. Git may be an unusual persistence
+  layer, but it gives me readable diffs and a straightforward history.
 
-** Lisp
+** Exploration
 :PROPERTIES:
-:CREATED:  [2025-12-21 Sun 11:20]
+:CREATED:  [2026-09-26 Sat]
 :END:
 
 - [[https://github.com/alecigne/xkcd-geohashing.el][xkcd-geohashing.el]] :: An implementation of XKCD's [[https://geohashing.site/][geohashing]]
   algorithm for Emacs.
 
+** Experiments and write-ups
+:PROPERTIES:
+:CREATED:  [2026-09-26 Sat]
+:END:
+
 - [[file:fennel-sandbox/README.org][fennel-sandbox]] :: Code written while learning [[https://fennel-lang.org/][Fennel]], in particular
-  for the [[https://tic80.com/][TIC-80]] fantasy console. ([[https://github.com/alecigne/fennel-sandbox][GitHub]])
-
-** Emacs
-:PROPERTIES:
-:CREATED:  [2025-12-21 Sun 11:26]
-:END:
-
-- [[https://github.com/alecigne/.emacs.d][.emacs.d]] :: My Emacs config 🙂
-
-* Misc
-:PROPERTIES:
-:CREATED:  [2025-01-18 Sat 23:57]
-:END:
+  for the [[https://tic80.com/][TIC-80]] fantasy console.
 
 - [[file:gralhix-osint-exercises/README.org][gralhix-osint-exercises]] :: My solutions to Sofia Santos' OSINT
-  exercises!
+  exercises.
 
-* Projects I rely on
+* Tools and services I rely on
 :PROPERTIES:
 :CREATED:  [2025-12-21 Sun 12:19]
 :END:
 
-An evergrowing, alphabetical list of projects I actively use and
-support one way or another.
-
-These projects are made possible by a myriad of sometimes unpaid
-volunteers. Please support them for a more free and open world!
+A deliberately personal and incomplete list of the tools and services
+I return to regularly. Where possible, I support the people who build
+and maintain them.
 
 ** Software
 :PROPERTIES:
 :CREATED:  [2025-12-21 Sun 12:22]
 :END:
 
-- [[https://www.debian.org/][Debian]], an operating system.
-- [[https://www.gnu.org/software/emacs/][Emacs]], a text editor.
-- [[https://www.gnu.org/][GNU]], a collection of free software and an operating system.
-- [[https://i3wm.org/][i3]], a window manager.
-- [[https://www.kernel.org/][Linux]], an open source kernel.
-- [[https://www.passwordstore.org/][pass]], the standard unix password manager.
-- [[https://signal.org/][Signal]], a messaging application.
-- [[https://termux.dev/][Termux]], a terminal emulator for Android.
-- [[https://github.com/tmux/tmux/wiki][tmux]], a terminal multiplexer.
-- [[https://www.wireguard.com/][WireGuard]], an open source VPN solution.
+- [[https://www.debian.org/][Debian]] :: The stable foundation of my computing environments.
+- [[https://www.kernel.org/][Linux]] :: The kernel underneath it.
+- [[https://www.gnu.org/][GNU]] :: The command-line tools at the core of my environment.
+- [[https://www.gnu.org/software/emacs/][Emacs]] :: Where I write code and notes, and publish this website.
+- [[https://i3wm.org/][i3]] and [[https://stumpwm.github.io/][StumpWM]] :: Window managers.
+- [[https://www.passwordstore.org/][pass]] :: A command-line password manager.
+- [[https://signal.org/][Signal]] :: A private messaging app.
+- [[https://termux.dev/][Termux]] :: A Linux environment on Android that lets me work and
+  publish on the go.
+- [[https://github.com/tmux/tmux/wiki][tmux]] :: A terminal multiplexer that keeps my sessions organized.
+- [[https://www.wireguard.com/][WireGuard]] :: A simple, dependable way to connect to my network.
 
-...and so many others.
-
-** Other
+** Online services
 :PROPERTIES:
 :CREATED:  [2025-12-21 Sun 12:22]
 :END:
 
-- [[https://gpx.studio/][gpx.studio]], an online GPX file editor.
-- [[https://www.openstreetmap.org/][OpenStreetMap]], a free, editable map of the world.
-- [[https://somafm.com/][SomaFM]], a listener-supported, commercial-free, underground webradio.
+- [[https://somafm.com/][SomaFM]] :: Listener-supported radio, and one of my main sources of
+  [[https://somafm.com/dronezone/][ambient music]].
+- [[https://www.openstreetmap.org/][OpenStreetMap]] :: The free, editable map.
+- [[https://gpx.studio/][gpx.studio]] :: My go-to editor for GPX tracks.
 
 * Config                                                           :noexport:
 :PROPERTIES:

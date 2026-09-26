@@ -116,9 +116,23 @@ pre.src.hljs {
     background-color: #f2f2f2;
 }
 
+dt, dd {
+  display: inline;
+  margin: 0;
+}
+
 dt {
   font-weight: bold;
-  margin-top: 1em;
+}
+
+dt::after {
+  content: " – ";
+}
+
+dd::after {
+  content: "";
+  display: block;
+  margin-bottom: 1em;
 }
 
 table { border-collapse: collapse; }

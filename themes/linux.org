@@ -6,11 +6,33 @@
 :CREATED:  [2024-12-14 Sat 17:17]
 :END:
 
+** Projects
+:PROPERTIES:
+:CREATED:  [2026-09-26 Sat]
+:END:
+
+- [[https://github.com/alecigne/codex-sandbox][codex-sandbox]] :: A personal development environment for [[https://github.com/openai/codex][Codex CLI]],
+  powered by rootless [[https://podman.io/][Podman]].
+
+** Notes
+:PROPERTIES:
+:CREATED:  [2026-09-26 Sat]
+:END:
+
+- [[file:../notes/stow.org][GNU Stow]] :: A short tutorial on managing dotfiles with GNU Stow.
+
+- [[file:../notes/i3-xmodmap.org][i3 and xmodmap]] :: Loading a custom keyboard mapping when starting i3.
+
+- [[file:../notes/linux-wifi.org][Setting up NetworkManager on a minimal Linux install]] :: Fixing a few
+  problems with NetworkManager on Linux.
+
 - [[file:../notes/postgres-docker.org][Setting up a Postgres Docker container for a homelab]] :: Container
   creation, configuration, and backups.
+
+- [[file:../notes/qemu.org][Using QEMU]] :: Creating and managing a Debian virtual machine.
 
 - [[file:../notes/synology-domains.org][Setting up local domains on a LAN using a Synology NAS]] :: Accessing
   resources on a LAN using tailored URLs such as =dsm.homelab.lan/=.
 
-- [[file:../notes/linux-wifi.org][Setting up NetworkManager on a minimal Linux install]] :: Fixing a few
-  problems with NetworkManager on Linux.
+- [[file:../notes/wireguard.org][A few useful WireGuard commands]] :: A personal reference for setting
+  up and managing WireGuard peers.
