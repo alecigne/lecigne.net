@@ -10,7 +10,7 @@ found on my [[https://github.com/alecigne?tab=repositories][GitHub profile]].
 :CREATED:  [2025-01-18 Sat 23:57]
 :END:
 
-** Development tools and environments
+** Development, tools, and environments
 :PROPERTIES:
 :CREATED:  [2026-09-26 Sat]
 :END:
@@ -20,6 +20,12 @@ found on my [[https://github.com/alecigne?tab=repositories][GitHub profile]].
   working directories while keeping Codex's own Linux sandbox enabled.
 
 - [[https://github.com/alecigne/.emacs.d][.emacs.d]] :: My Emacs configuration 🙂
+
+- [[https://github.com/alecigne/dotfiles][dotfiles]] :: My dotfiles.
+
+- [[https://github.com/alecigne/alczerty][alczerty]] :: My AZERTY-based keyboard layout. It turns the =ù= key
+  into a dead key for French typography and extra symbols while
+  keeping familiar AZERTY habits.
 
 ** Music and data
 :PROPERTIES:
